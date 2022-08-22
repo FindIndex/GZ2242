@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="./jQuery.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div class="menu-m">
+      <div class="tab">
+        <div class="orderfood">
+          点菜
+          <p></p>
+        </div>
+        <div class="pingjia">评价(1533)</div>
+        <div class="shangjia">商家</div>
+      </div>
+      <div class="menu">
+        <!-- <div class="one">
+          <img src="./图片/pic2.png" alt="" />
+          <div class="right">
+            <p class="foodname">麻辣小龙虾</p>
+            <span>月售243</span>
+            <p class="price">￥<span class="price1">3.5</span></p>
+            <div class="order">
+              <i class="fa fa-minus-circle jian"></i>
+              <span class="num">0</span>
+              <i class="fa fa-plus-circle jia"></i>
+            </div>
+          </div>
+        </div>
+        <div class="one">
+          <img src="./图片/pic4.png" alt="" />
+          <div class="right">
+            <p class="foodname">水果</p>
+            <span>月售243</span>
+            <p class="price">￥<span class="price1">5</span></p>
+            <div class="order">
+              <i class="fa fa-minus-circle jian"></i>
+              <span class="num">0</span>
+              <i class="fa fa-plus-circle jia"></i>
+            </div>
+          </div>
+        </div>
+        <div class="one">
+          <img src="./图片/pic3.png" alt="" />
+          <div class="right">
+            <p class="foodname">蔬菜</p>
+            <span>月售243</span>
+            <p class="price">￥<span class="price1">3.5</span></p>
+            <div class="order">
+              <i class="fa fa-minus-circle jian"></i>
+              <span class="num">0</span>
+              <i class="fa fa-plus-circle jia"></i>
+            </div>
+          </div>
+        </div>
+        <div class="one">
+          <img src="./图片/pic2.png" alt="" />
+          <div class="right">
+            <p class="foodname">麻辣烫</p>
+            <span>月售243</span>
+            <p class="price">￥<span class="price1">28</span></p>
+            <div class="order">
+              <i class="fa fa-minus-circle jian"></i>
+              <span class="num">0</span>
+              <i class="fa fa-plus-circle jia"></i>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="car">
+        <i class="fa fa-shopping-cart">
+          <span class="totalNum"></span>
+        </i>
+        <p>共计￥<span class="total">0.00</span>(含配送费￥2.5)</p>
+        <button>结算</button>
+      </div>
+    </div>
+
+    <div class="shopCar" style="display: none">
+      <div class="main">
+        <div class="list"></div>
+        <div class="head">
+          <p>购物车</p>
+          <i class="fa fa-window-close"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script>
+      $(".car").click(function () {
+        $(".shopCar").show();
+      });
+      $(".shopCar i").click(function () {
+        $(".shopCar").hide();
+      });
+
+      $(".one").each(function (index, ele) {
+        // console.log(ele);
+        if (!Number($(ele).find(".num").text())) {
+          $(ele).find(".num").prev().hide();
+        }
+      });
+
+      function filter() {
+        var arr = [];
+        $(".menu .one").each(function (index, ele) {
+          // console.log(ele);
+          if (Number($(ele).find(".num").text())) {
+            arr.push({
+              node: $(ele),
+              count: Number($(ele).find(".num").text()),
+              price: Number($(ele).find(".price1").text()),
+            });
+          }
+        });
+        return arr;
+      }
+
+      function compute(arr) {
+        var totalCount = 0;
+        var totalPrice = 0;
+        arr.forEach(function (ele) {
+          totalCount += ele.count;
+          totalPrice += ele.count * ele.price;
+        });
+        return {
+          totalCount: totalCount,
+          totalPrice: totalPrice,
+        };
+      }
+
+      function zhuijiayuansu(arr) {
+        $(".shopCar .main .list").empty();
+        arr.forEach(function (ele) {
+          $(".shopCar .main .list").append(ele.node.clone(true));
+        });
+      }
+
+      function xianshishuju() {}
+
+      $(".one")
+        .find(".jia")
+        .click(function () {
+          var newNum = Number($(this).prev().text()) + 1;
+          console.log(newNum, $(this).prev().text());
+          $(this).prev().text(newNum);
+          if (newNum > 0) {
+            $(this).prev().prev().show();
+          }
+
+          var arr = filter();
+          zhuijiayuansu(arr);
+        });
+      $(".one")
+        .find(".jian")
+        .click(function () {
+          var newNum = Number($(this).next().text()) - 1;
+          $(this).next().text(newNum);
+          if (newNum <= 0) {
+            $(this).hide();
+          }
+        });
+    </script> -->
+
+    <!-- 思路二 -->
+    <script>
+      var goods = [
+        {
+          id: 1,
+          title: "麻辣小龙虾",
+          xl: 243,
+          price: 3.5,
+          img: "pic1.png",
+          num: 1,
+        },
+        {
+          id: 2,
+          title: "水果",
+          xl: 24,
+          price: 5,
+          img: "pic2.png",
+          num: 0,
+        },
+      ];
+
+      function gengxinshitu() {
+        $(".menu").empty();
+        $(".list").empty();
+        goods.forEach(function (good) {
+          // console.log(good);
+          $(".menu").append(
+            '<div class="one"><img src="./图片/' +
+              good.img +
+              '" alt="" /><div class="right"><p class="foodname">' +
+              good.title +
+              '</p><span>月售243</span><p class="price">￥<span class="price1">' +
+              good.price +
+              '</span></p><div class="order"><i class="fa fa-minus-circle jian" title="' +
+              good.id +
+              '"></i><span class="num">' +
+              good.num +
+              '</span><i class="fa fa-plus-circle jia" title="' +
+              good.id +
+              '"></i></div></div></div>'
+          );
+
+          if (good.num) {
+            $(".list").append(
+              '<div class="one"><img src="./图片/' +
+                good.img +
+                '" alt="" /><div class="right"><p class="foodname">' +
+                good.title +
+                '</p><span>月售243</span><p class="price">￥<span class="price1">' +
+                good.price +
+                '</span></p><div class="order"><i class="fa fa-minus-circle jian" title="' +
+                good.id +
+                '"></i><span class="num">' +
+                good.num +
+                '</span><i class="fa fa-plus-circle jia" title="' +
+                good.id +
+                '"></i></div></div></div>'
+            );
+          }
+        });
+
+        // $(".one")
+        //   .find(".jia")
+        //   .click(function () {
+        //     console.log("jia");
+
+        //     // console.log($(this).attr("title"));
+        //     goods.forEach(function (good) {
+        //       if (good.id == $(this).attr("title")) {
+        //         //   console.log(good);
+        //         good.num += 1;
+        //       }
+        //     }, this);
+
+        //     gengxinshitu();
+        //   });
+
+        // $(".one")
+        //   .find(".jian")
+        //   .click(function () {
+        //     console.log("jian");
+        //     goods.forEach(function (good) {
+        //       if (good.id == $(this).attr("title")) {
+        //         //   console.log(good);
+        //         good.num -= 1;
+        //       }
+        //     }, this);
+
+        //     gengxinshitu();
+        //   });
+      }
+      gengxinshitu();
+
+      $(document).on("click", ".jia", function () {
+        console.log("jia");
+
+        // console.log($(this).attr("title"));
+        goods.forEach(function (good) {
+          if (good.id == $(this).attr("title")) {
+            //   console.log(good);
+            good.num += 1;
+          }
+        }, this);
+
+        gengxinshitu();
+      });
+
+      $("document").on("click", ".jian", function () {
+        console.log("jian");
+        goods.forEach(function (good) {
+          if (good.id == $(this).attr("title")) {
+            //   console.log(good);
+            good.num -= 1;
+          }
+        }, this);
+
+        gengxinshitu();
+      });
+
+      $(".car").click(function () {
+        $(".shopCar").show();
+      });
+      $(".shopCar .head i").click(function () {
+        $(".shopCar").hide();
+      });
+    </script>
+    <!-- <script>
+        // 初始化
+        function init() {
+            $('.car .totalNum').text(totalnum())
+            $('.total').text(totalMoney())
+            if ($('.jia').siblings('span').text() == '0') {
+                $('.jia').siblings('.jian').hide()
+            }
+            $('.shopCar').hide()
+        }
+        init()
+        $('.jian').hide()
+
+
+        function totalnum() {
+            var totalnum = 0;
+            for (var i = 0; i < $('.num').length; i++) {
+                // console.log($('.num').eq(i).text());
+                totalnum += Number($('.menu .num').eq(i).text())
+            }
+            return totalnum
+        }
+
+        function totalMoney() {
+            var money = 0
+            for (var i = 0; i < $('.num').length; i++) {
+                var money = money + Number($('.menu .price1').eq(i).text()) * Number($('.num').eq(i).text())
+            }
+            return money;
+        }
+
+        $('.one .jia').click(function () {
+
+
+            $(this).siblings('.jian').show()
+
+            var tmp = $(this).siblings("span").text()
+            var n = Number(tmp)
+            n++
+            if ($(this).siblings("span").text() == '0') {
+                var node = $(this).parents('.one').clone(true)
+                // console.log(node.children('.right').children('.order').children('.num').text());
+                node.children('.right').children('.order').children('.num').text(n)
+                $('.main').append(node)
+            } else {
+                $('.shopCar .num').text(n)
+            }
+            $(this).siblings("span").text(n)
+
+            // console.log(n);
+            $('.car .totalNum').text(totalnum())
+            $('.total').text(totalMoney())
+
+
+        })
+
+        $('.one .jian').click(function () {
+            if ($(this).siblings('span').text() == '1') {
+                $(this).hide()
+            }
+
+            // console.log($(this).siblings('span').text());
+            if (Number($(this).siblings("span").text()) > 0) {
+                var tmp = $(this).siblings("span").text()
+                var n = Number(tmp)
+
+                // if()
+                n--
+
+                $(this).siblings("span").text(n)
+                $('.car .totalNum').text(totalnum())
+                $('.total').text(totalMoney())
+
+            }
+        })
+
+
+
+        $('.car').click(function () {
+            $('.shopCar').show()
+        })
+        $('.shopCar i').click(function () {
+            $('.shopCar').hide()
+        })
+
+
+        // 选项卡
+
+
+
+
+
+
+
+    </script> -->
+  </body>
+</html>

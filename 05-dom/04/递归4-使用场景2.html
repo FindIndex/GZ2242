@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var obj3 = {
+        name: "老王",
+        age: 22,
+        arr: [10, 20, 30, 40],
+      };
+      // var obj3 = [10,20,30]
+
+      function deepCopy(obj) {
+        // 1. 判断obj 是不是属于引用数据类型
+        if (typeof obj !== "object") {
+          return obj;
+        }
+
+        // 2. 判断此时的obj是数组还是对象
+        var newobj = Array.isArray(obj) ? [] : {};
+
+        // 3. for..in 拿到obj 每一项的值
+        for (var i in obj) {
+          // 4. 先判断每一项的值是否不为引用数据类型
+          if (typeof obj[i] !== "object") {
+            // 5. 直接给新的newobj 赋值
+            newobj[i] = obj[i];
+          } else {
+            // 6. 如果obj里面有一项的值为引用数据类型，则重新调用deepcopy这个方法
+            newobj[i] = deepCopy(obj[i]);
+          }
+        }
+
+        // 7. 循环执行完毕，返回这个新的 newobj
+        return newobj;
+      }
+
+      var obj4 = deepCopy(obj3);
+      console.log("改变值之前");
+      console.log(obj3);
+      console.log(obj4);
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      console.log("改变值之后");
+      obj3.name = "老刘";
+      obj3.arr[1] = "99999";
+      console.log(obj3);
+      console.log(obj4);
+
+      // var str = "今天天气真好";
+      // var str2 = str
+      // console.log("str===>",str);
+      // console.log("str2===>",str2);
+
+      // str = "今晚要下雨"
+      // console.log("str===>",str);
+      // console.log("str2===>",str2);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,216 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.menu-m {
+  width: 370px;
+  margin: 0 auto;
+  position: relative;
+}
+.tab {
+  width: 370px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.tab div {
+  width: 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tab div p {
+  width: 50px;
+  height: 1px;
+  border: 1px solid orange;
+}
+.menu {
+  width: 370px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  position: relative;
+}
+.menu .one {
+  display: flex;
+  background-color: #fbf7f7;
+  position: relative;
+  margin-bottom: 10px;
+}
+.menu .one img {
+  display: block;
+  width: 80px;
+}
+.menu .one .right {
+  margin-left: 10px;
+}
+.menu .one .right p.foodname {
+  margin-bottom: 5px;
+}
+.menu .one .right > span {
+  font-size: 14px;
+  color: gray;
+}
+.menu .one .right p.price {
+  color: orange;
+  margin-top: 5px;
+}
+.menu .one .right .order {
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+.menu .one .right .order span {
+  display: block;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+.menu .one .right .order i {
+  display: block;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: orange;
+}
+.car {
+  width: 370px;
+  margin: 0 auto;
+  background-color: gray;
+  height: 30px;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+.car i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-color: orange;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  top: -50%;
+  left: 15px;
+}
+.car i span {
+  position: absolute;
+  font-size: 8px;
+  color: white;
+  display: block;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  top: -2px;
+  background-color: red;
+  border-radius: 50%;
+  right: -5px;
+}
+.car p {
+  height: 100%;
+  line-height: 30px;
+  font-size: 14px;
+}
+.car button {
+  width: 70px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-color: orange;
+  position: absolute;
+  right: 0;
+}
+.shopCar {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 370px;
+  height: 580px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shopCar .main {
+  width: 320px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 10px;
+}
+.shopCar .main .head {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}
+.shopCar .main .head p {
+  line-height: 20px;
+}
+.shopCar .main .head i {
+  display: block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 15px;
+  overflow: hidden;
+}
+.shopCar .one {
+  display: flex;
+  background-color: #fbf7f7;
+  position: relative;
+  margin-bottom: 10px;
+}
+.shopCar .one img {
+  display: block;
+  width: 80px;
+}
+.shopCar .one .right {
+  margin-left: 10px;
+}
+.shopCar .one .right p.foodname {
+  margin-bottom: 5px;
+}
+.shopCar .one .right > span {
+  font-size: 14px;
+  color: gray;
+}
+.shopCar .one .right p.price {
+  color: orange;
+  margin-top: 5px;
+}
+.shopCar .one .right .order {
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+.shopCar .one .right .order span {
+  display: block;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+.shopCar .one .right .order i {
+  display: block;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: orange;
+}
+/*# sourceMappingURL=./style.css.map */

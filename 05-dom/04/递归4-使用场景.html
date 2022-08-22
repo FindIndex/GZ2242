@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [10, 20, 30, 40, 50];
+      var arr2 = arr;
+      console.log("arr===>", arr);
+      console.log("arr2===>", arr2);
+
+      arr[0] = "老王";
+      console.log("arr===>", arr);
+      console.log("arr2===>", arr2);
+      arr2[1] = "老陈";
+      console.log("arr===>", arr);
+      console.log("arr2===>", arr2);
+
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      var obj3 = {
+        name: "老王",
+        age: 22,
+        arr: [10, 20, 30, 40],
+      };
+      var obj4 = {};
+      for (var i in obj3) {
+        console.log("i==>", i);
+        console.log("obj3[i]===>", obj3[i]);
+        //将obj3 里面的每一项的值，赋值给obj4
+
+        obj4[i] = obj3[i];
+      }
+      console.log("改变值之前");
+      console.log(obj3);
+      console.log(obj4);
+      console.log("");
+      console.log("");
+      console.log("");
+      console.log("");
+
+      console.log("改变值之后");
+      obj3.name = "老刘";
+      obj3.arr[1] = "99999";
+      console.log(obj3);
+      console.log(obj4);
+    </script>
+  </body>
+</html>

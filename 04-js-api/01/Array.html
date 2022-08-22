@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   var nums = [11, 22, 33];
+      var nums = new Array(11, 22, 33);
+      //   返回值 和  会不会改变原始数组
+
+      //   属性
+      console.log(nums.length);
+      console.log(nums.constructor);
+      //   构造函数 Array
+
+      // 区分数组与对象
+      var a = new Array(3);
+      //   如果参数是一个数字 那么代表数组的长度
+      //   var b = {};
+      var b = new Object();
+      console.log(typeof a);
+      console.log(typeof b);
+
+      console.log(a.push);
+      console.log(b.push);
+
+      //   instanceof
+      //   object instanceof constructor
+
+      console.log(nums instanceof Array);
+      console.log(a instanceof Array);
+      console.log(b instanceof Array);
+
+      var res = nums.push(44);
+      console.log(res, nums);
+
+      var res = nums.pop();
+      console.log(res, nums);
+
+      var res = nums.shift();
+      console.log(res, nums);
+
+      var res = nums.unshift(11);
+      console.log(res, nums);
+
+      //   nums.splice(索引，删除的个数，新的项...)
+      //   var res = nums.splice(1, 1, 77);
+      //   console.log(res, nums);
+      //   res是一个数组
+
+      var res = nums.splice(1, 1, 77, 88);
+      console.log(res, nums);
+    </script>
+
+    <script>
+      var xs = [11, 22, 33];
+      var ys = [44, 55];
+
+      console.log(xs.concat(55));
+      console.log(xs.concat([44, 55]));
+      console.log(xs.concat([[44, 55]]));
+      //   不会改变原始数组  会返回一个新数组
+
+      //   array.forEach(function(currentValue, index, arr), thisValue)
+      //   xs.forEach(function (current, index, arr) {
+      //     console.log(current, index, arr === xs);
+      //   });
+      //   xs.concat([44, 55]).forEach(function (current, index, arr) {
+      //     console.log(current, index, arr);
+      //   });
+
+      //   需求 需要一个新的数组 这个长度等于nums 每一项都是原来项的2倍
+      var nums = [1, 2, 3, 4, 5, 6];
+
+      //   var newArr = [];
+      //   for (var i = 0; i < nums.length; i++) {
+      //     newArr.push(nums[i] * 2);
+      //   }
+
+      var newArr = [];
+      nums.forEach(function (n, i) {
+        newArr.push(n * 2);
+      });
+
+      //   array.map(function(currentValue,index,arr), thisValue)
+      //   var newArr = nums.map(function (n, i) {
+      //     return n * 2;
+      //   });
+
+      var newArr = nums.map((n) => n * 2);
+
+      //   需求 判断一个数组里面 是不是都是真
+      //   var bools = [true, true, false, true];
+      //   var bools = [true, true, false, true];
+      var bools = [false, false, false, false];
+      //   array.every(function(currentValue,index,arr), thisValue)
+      var isAllTrue = bools.every(function (e, i) {
+        console.log(e, i);
+        return e;
+      });
+
+      //   var isAllTrue = true;
+      //   bools.forEach(function (e) {
+      //     // console.log(e);
+      //     isAllTrue = isAllTrue && e;
+      //   });
+
+      //   需求 判断数组里面 是不是有一个为真
+      //   var isOneTrue = false;
+      //   bools.forEach(function (e) {
+      //     // console.log(e);
+      //     isOneTrue = isOneTrue || e;
+      //   });
+
+      //   array.some(function(currentValue,index,arr), thisValue)
+      var isOneTrue = bools.some(function (e, i) {
+        return e;
+      });
+
+      //   需求 求nums所有项之和
+      //   var sum = 0;
+      //   nums.forEach(function (e) {
+      //     sum += e;
+      //   });
+      //   array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+
+      var sum = nums.reduce(function (total, e, i, arr) {
+        return total + e;
+      }, 0);
+
+      //   array.copyWithin(target, start, end);
+      //   console.log(nums);
+      //   nums.copyWithin(3, 2);
+      //   console.log(nums);
+
+      //   //   nums.fill(10);
+      //   new Array(6).fill(1);
+
+      //   array.findIndex(function(currentValue, index, arr), thisValue)
+      //   符合条件的数组第一个元素位置
+      var res = nums.findIndex(function (e) {
+        return e % 5 === 0;
+      });
+      console.log(res, nums);
+
+      var res = nums.indexOf(5);
+      //   nums.includes(10);
+
+      //   查找不到时 返回-1
+      //   var res = nums.findIndex(function (e) {
+      //     return e % 10 === 0;
+      //   });
+
+      //   var res = nums.find(function (e) {
+      //     return e % 5 === 0;
+      //   });
+      //   var res = nums.find(function (e) {
+      //     return e % 10 === 0;
+      //   });
+      console.log(res, nums);
+
+      console.log(Array.isArray(nums));
+
+      //   slice(start, end（不包括）) 截取
+      nums.slice(1, 3);
+      nums.slice(1);
+      nums.slice(-1);
+
+      nums.join();
+      nums.join("|");
+
+      var fruits = ["Banana", "Orange", "Apple", "Mango", "Abb"];
+      fruits.sort();
+
+      var scores = [1, 78, 4, 6, 15, 9];
+      //   scores.sort();
+      // 如果不带参数 那就是按照字符串首个字母依次往后
+
+      console.log(scores);
+      //   scores.sort(function (a, b) {
+      //     // console.log(a, b);
+      //     return a - b;
+      //   });
+      //   携带回调函数 那么回依据回到函数的返回值 正负 来决定 两两是都交换位置
+
+      //   scores.sort(function (a, b) {
+      //     // console.log(a, b);
+      //     return b - a;
+      //   });
+
+      //   debugger;
+      //   scores.sort(function (a, b) {
+      //     console.log(a, b);
+      //     return b - a;
+      //   });
+      //   console.log(scores);
+      //   正数不叫换 复数交换位置
+
+      var arr = [2, 1, 3];
+
+      arr.reverse();
+      //   debugger;
+      //   arr.sort(function (a, b) {
+      //     console.log(a, b);
+      //     return a - b;
+      //   });
+
+      //   洗牌函数
+      scores.sort(function (a, b) {
+        return Math.random() - 0.5;
+      });
+      console.log(scores);
+    </script>
+
+    <script>
+      nums.push; // 末尾添加
+      nums.pop; // 末尾删除
+      nums.shift; // 头部删除
+      nums.unshift; //头部添加
+      nums.splice; // 根据index替换 或删除
+
+      nums.indexOf; // 某个项的下标 找不到为-1
+      nums.lastIndexOf;
+
+      nums.toString; // 转成字符串用,分隔
+      nums.join; // 用自定义符号分隔
+
+      nums.slice; // 截取部分
+      nums.concat; // 拼合多个数组
+
+      nums.sort; // 排序
+      nums.reverse; //反转排序
+
+      nums.forEach; //遍历
+
+      nums.find; // 查找符合的第一个项
+      nums.findIndex; // 查找符合的第一个项的下标  -1
+
+      nums.every; // 每一项是否符合条件
+      nums.some; // 某一项是否符合条件
+      nums.map; // 返回同等长度的数组，每一项都做某个处理
+      nums.filter; // 查找符合的所有元素 返回数组
+      nums.includes; //是否包含某个项
+      nums.reduce; // 从左到右累加每项
+
+      var nums = [1, 2, 3, 4, 5, 6];
+      nums.map(function (e) {
+        return e * 2;
+      });
+
+      nums.filter(function (e) {
+        return e % 2 === 0;
+      });
+    </script>
+
+    <!-- <button>11</button>
+    <button>22</button>
+    <button>33</button>
+
+    <script>
+      var btns = document.getElementsByTagName("button");
+      btns.forEach(function (current, index, arr) {
+        console.log(current, index);
+      });
+    </script> -->
+    <!-- http://wjhsh.net/suxia-p-14048270.html -->
+  </body>
+</html>

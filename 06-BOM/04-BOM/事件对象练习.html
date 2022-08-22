@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            img {
+                /* 绝对定位 */
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            // 随机漫天小狗狗
+
+            // 1. 通过js设置网页背景颜色
+            // 2. 随机出现小狗狗图片( 随机位置, 随机大小, 出现的位置还不能超出网页之外 )
+            // 3. 小狗狗图片需要能被点击, 点击以后可以消失(删除元素)
+            // 4. 定时器,每个一段时间,随机出现小狗狗
+
+            // 得到指定范围的随机整数
+            function getRandom(min, max) {
+                var minValue = Math.min(min, max);
+                var maxValue = Math.max(min, max);
+                return Math.floor(Math.random() * (maxValue - minValue + 1) + minValue);
+            }
+
+            // 设置网页背景颜色
+            document.body.style.backgroundColor = "#ccc";
+
+            // 开启定时器
+            setInterval(function () {
+                // 创建新的img标签  document.createElement()返回就是一个dom对象
+                var newImg = document.createElement("img");
+
+                // 设置img标签的src路径
+                newImg.src =
+                    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F69%2F33%2F5bea1a6469886_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1662874235&t=369e4c516195feac48af044ae1849eb4";
+
+                // 随机大小宽度
+                var imgWidth = getRandom(50, 150);
+
+                // 设置img图片宽度
+                newImg.width = imgWidth;
+
+                // 随机位置
+                newImg.style.left = getRandom(0, window.innerWidth - imgWidth) + "px";
+                newImg.style.top = getRandom(0, window.innerHeight - imgWidth) + "px";
+
+                // 添加到body中
+                document.body.appendChild(newImg);
+            }, 1000);
+
+            // 绑定点击事件
+            window.addEventListener("click", function (e) {
+                // 提示 e.target.nodeName 可以获得触发目标对象的名字(大写)
+                // console.log(e.target.nodeName);
+                if (e.target.nodeName == "IMG") {
+                    e.target.remove();
+                } else {
+                    alert("你点击的不是爱心哟");
+                }
+            });
+        </script>
+    </body>
+</html>

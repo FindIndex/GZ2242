@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.response);
+        }
+      };
+
+      xhr.open("GET", "./test.json", true);
+
+      xhr.send();
+    </script> -->
+
+    <input type="text" />
+    <ul></ul>
+    <script>
+      function getJSON(url, callback) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // console.log(xhr.response);
+            // 这里可以访问到结果
+            callback(JSON.parse(xhr.response));
+          }
+        };
+
+        xhr.open("GET", url, true);
+
+        xhr.send();
+      }
+
+      // var f = function (res) {
+      //   console.log(res);
+      // };
+      // getJSON("./test.json", f);
+
+      getJSON("./test.json", function (res) {
+        console.log(res);
+      });
+
+      getJSON("https://apis.netstart.cn/maoyan/cities.json", function (res) {
+        console.log(res.cts);
+      });
+      // 可以跨域访问  响应头加上了 access-control-allow-origin: http://127.0.0.1:5500
+
+      getJSON("https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&wd=王大锤", function (res) {
+        console.log(res);
+      });
+
+      // has been blocked by CORS policy: No 'Access-Control-Allow-Origin'  跨域
+      // 跨域  => 协议 域名 端口 三个有一个不同就是跨域
+      // 1服务器允许跨域  2关闭同源策略（仅用于开发） EASY CORS
+
+      // CORS policy 同源策略
+
+      //
+      // JSON.parse()  把字符串转换为json
+      // JSON.stringify()  把json转为字符串
+
+      document.querySelector("input").oninput = function () {
+        // console.log(this.value);
+        getJSON("https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&wd=" + this.value, function (res) {
+          // console.log(res.g);
+          document.querySelector("ul").innerHTML = "";
+          if (res.g) {
+            res.g.forEach(function (o) {
+              var liNode = document.createElement("li");
+              liNode.innerText = o.q;
+              document.querySelector("ul").appendChild(liNode);
+            });
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

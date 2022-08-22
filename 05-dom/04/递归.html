@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // for(var i = 10; i >= 1; i--) {
+      //     console.log(i);
+      // }
+
+      function fun(num) {
+        console.log(num); //10 9
+        if (num == 1) {
+          return;
+        }
+
+        fun(num - 1);
+      }
+
+      fun(10);
+
+      // 10 - 1
+      // 10 9 8 7 6 5  4 3 2 1
+
+      // console.log(10)
+      // fun(9)
+      // console.log(9)
+      // fun(10)
+
+      // 怎么使用使用递归
+      // 第一步:封装一个能解决单一问题的函数(类似循环体)
+      // 第二步:在这个函数中调用当前函数 调整问题的规模(类似循环中的变量更新)
+      // 第三步:在函数中设置递归出口 如果没有递归出口 递归调用无法结束(类似循环中的判断条件)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div class="big">
+      <div class="small">small</div>
+    </div> -->
+
+    <!-- <div class="box"></div>
+    <style>
+      .box {
+        width: 10px;
+        height: 100px;
+        background-color: lightblue;
+
+        transition: all 0.3s;
+        margin: 100px;
+
+        /* transform-origin: top left; */
+        transform-origin: center 200%;
+        /* 修改变形基准点 */
+      }
+      .box:hover {
+        /* transform: scale(2); */
+
+        transform: rotate(45deg);
+      }
+    </style> -->
+
+    <div class="stage">
+      <div class="tail">
+        <!-- <i class="b"></i>
+        <i class="s"></i> -->
+      </div>
+      <div class="needle"></div>
+    </div>
+    <style>
+      .stage {
+        width: 500px;
+        height: 500px;
+        background-color: lightblue;
+        border-radius: 50%;
+      }
+      .stage .tail {
+        /* display: flex; */
+        position: relative;
+      }
+      .stage .tail i {
+        display: block;
+        transform-origin: center 250px;
+      }
+      .stage .tail i.b {
+        width: 8px;
+        height: 40px;
+        background-color: lightcoral;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -4px;
+
+        /* transform: rotate(45deg); */
+      }
+      .stage .tail i.s {
+        width: 4px;
+        height: 20px;
+        background-color: black;
+
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -2px;
+        /* transform: rotate(45deg); */
+      }
+    </style>
+
+    <script>
+      for (let i = 0; i < 12 * 5; i++) {
+        var node = document.createElement("i");
+        if (i % 5 === 0) {
+          node.className = "b";
+        } else {
+          node.className = "s";
+        }
+
+        node.style.transform = "rotate(" + i * (360 / (12 * 5)) + "deg)";
+        document.querySelector(".tail").appendChild(node);
+      }
+    </script>
+  </body>
+</html>
