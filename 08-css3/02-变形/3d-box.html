@@ -21,7 +21,9 @@
         height: 100vh;
         margin: 0;
 
-        perspective: 500px;
+        perspective: 800px;
+        /* perspective-origin: top center; */
+        perspective-origin: 50% 50%;
       }
       .box {
         width: 200px;
@@ -41,24 +43,34 @@
         height: 100%;
       }
       .box .front {
-        background-color: rgba(173, 216, 230, 0.499);
+        background-color: rgba(173, 216, 230);
         transform: translateZ(100px);
       }
       .box .back {
-        background-color: rgba(240, 128, 128, 0.526);
+        background-color: rgba(240, 128, 128);
         /* transform: rotateY(45deg); */
         transform: rotateY(180deg) translateZ(100px);
       }
 
       .box .left {
-        background-color: rgba(144, 238, 144, 0.436);
+        background-color: rgba(144, 238, 144);
         transform: rotateY(-90deg) translateZ(100px);
       }
       .box .right {
-        background-color: rgba(32, 178, 171, 0.474);
+        background-color: rgba(32, 178, 171);
         transform: rotateY(90deg) translateZ(100px);
-
       }
     </style>
+
+    <script>
+      document.body.onmousemove = function (event) {
+        // console.log(event.pageX);
+
+        var x = (event.pageX - window.innerWidth / 2) * (20 / (window.innerWidth / 2)) + 50 + "%";
+        var y = (event.pageY - window.innerHeight / 2) * (20 / (window.innerHeight / 2)) + 50 + "%";
+        // console.log(x);
+        document.body.style.perspectiveOrigin = x + " " + y;
+      };
+    </script>
   </body>
 </html>
