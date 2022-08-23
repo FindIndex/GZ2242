@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">
+      <div class="front">front</div>
+      <div class="back">back</div>
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+
+        perspective: 500px;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        /* background-color: rgba(127, 127, 127, 0.319); */
+        position: relative;
+
+        transform-style: preserve-3d;
+
+        transform: rotateY(-45deg);
+      }
+      .box > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .box .front {
+        background-color: rgba(173, 216, 230, 0.499);
+        transform: translateZ(100px);
+      }
+      .box .back {
+        background-color: rgba(240, 128, 128, 0.526);
+        /* transform: rotateY(45deg); */
+        transform: rotateY(180deg) translateZ(100px);
+      }
+
+      .box .left {
+        background-color: rgba(144, 238, 144, 0.436);
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+      .box .right {
+        background-color: rgba(32, 178, 171, 0.474);
+        transform: rotateY(90deg) translateZ(100px);
+
+      }
+    </style>
+  </body>
+</html>
