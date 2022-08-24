@@ -12,6 +12,12 @@ body {
     perspective: 1000px;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 h3,
 h5,
 p {
@@ -32,7 +38,7 @@ p {
     transform-style: preserve-3d;
     transform-origin: center center 100px;
 
-    transition: all 3s;
+    transition: all .3s;
 
 
 
@@ -75,6 +81,7 @@ p {
     h5,
     p {
         transition: inherit;
+        z-index: 9;
     }
 
     &.active {
@@ -102,8 +109,87 @@ p {
         p {
             transform: translateZ(10px);
         }
+
+        ul {
+            li {
+                &:nth-child(1) {
+                    transform: rotate(-45deg) translateZ(150px);
+
+                }
+
+                &:nth-child(2) {
+                    transform: rotate(-45deg) translateZ(80px);
+
+                }
+
+                &:nth-child(3) {
+                    transform: rotate(-45deg) translateZ(80px);
+
+                }
+
+                &:nth-child(4) {
+                    transform: rotate(-45deg) translateZ(60px);
+
+                }
+
+                &:nth-child(5) {
+                    transform: rotate(-45deg) translateZ(75px);
+
+                }
+            }
+        }
     }
 
+
+
+    ul {
+        transform-style: preserve-3d;
+        transition: inherit;
+
+        display: flex;
+        z-index: 9;
+
+        li {
+            width: 20px;
+            height: 20px;
+            margin: 30px 10px;
+            background-color: white;
+
+            transform-style: preserve-3d;
+
+            transform: rotate(-45deg) translateZ(0px);
+            transition: inherit;
+            // transform: rotate(-45deg);
+
+            &::before,
+            &::after {
+                content: '2000';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 200px;
+                height: 100%;
+
+
+                transform-origin: left bottom;
+
+                background-image: linear-gradient(to right, white, rgb(150, 150, 150));
+            }
+
+            &::before {
+                // background-color: rgb(32, 248, 3);
+                transform-origin: left center;
+                transform: rotateY(90deg) rotateX(180deg);
+            }
+
+            &::after {
+
+                // background-color: rgba(0, 0, 255, 0.897);
+                transform: rotateY(90deg) rotateX(-90deg);
+
+            }
+        }
+    }
 
 
 

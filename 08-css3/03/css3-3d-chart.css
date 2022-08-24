@@ -8,6 +8,11 @@ body {
   align-items: center;
   perspective: 1000px;
 }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 h3,
 h5,
 p {
@@ -25,7 +30,7 @@ p {
   position: relative;
   transform-style: preserve-3d;
   transform-origin: center center 100px;
-  transition: all 3s;
+  transition: all 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +61,7 @@ p {
 .card h5,
 .card p {
   transition: inherit;
+  z-index: 9;
 }
 .card.active {
   transform: rotateX(60deg) translateZ(50px);
@@ -75,5 +81,53 @@ p {
 }
 .card.active p {
   transform: translateZ(10px);
+}
+.card.active ul li:nth-child(1) {
+  transform: rotate(-45deg) translateZ(150px);
+}
+.card.active ul li:nth-child(2) {
+  transform: rotate(-45deg) translateZ(80px);
+}
+.card.active ul li:nth-child(3) {
+  transform: rotate(-45deg) translateZ(80px);
+}
+.card.active ul li:nth-child(4) {
+  transform: rotate(-45deg) translateZ(60px);
+}
+.card.active ul li:nth-child(5) {
+  transform: rotate(-45deg) translateZ(75px);
+}
+.card ul {
+  transform-style: preserve-3d;
+  transition: inherit;
+  display: flex;
+  z-index: 9;
+}
+.card ul li {
+  width: 20px;
+  height: 20px;
+  margin: 30px 10px;
+  background-color: white;
+  transform-style: preserve-3d;
+  transform: rotate(-45deg) translateZ(0px);
+  transition: inherit;
+}
+.card ul li::before,
+.card ul li::after {
+  content: '2000';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  transform-origin: left bottom;
+  background-image: linear-gradient(to right, white, #969696);
+}
+.card ul li::before {
+  transform-origin: left center;
+  transform: rotateY(90deg) rotateX(180deg);
+}
+.card ul li::after {
+  transform: rotateY(90deg) rotateX(-90deg);
 }
 /*# sourceMappingURL=./css3-3d-chart.css.map */
