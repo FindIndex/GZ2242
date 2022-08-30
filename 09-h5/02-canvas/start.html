@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      canvas {
+        border: 1px solid red;
+      }
+    </style>
+    <canvas id="canvas" width="300" height="300"></canvas>
+
+    <script>
+      var canvas = document.getElementById("canvas");
+
+      //   获取绘制环境上下文
+      var context = canvas.getContext("2d");
+
+      //   绘制矩形
+      //   context.fillStyle = "red";
+      //   context.fillRect(100, 100, 50, 50);
+      // fillRect(x, y, w, h);
+
+      //   context.strokeStyle = "red";
+      //   context.lineWidth = 10;
+      context.strokeRect(100, 100, 50, 50);
+
+      context.moveTo(100, 100);
+      context.lineTo(200, 200);
+      context.lineTo(200, 100);
+      context.closePath();
+      //   闭合路径
+      //   context.stroke();
+      context.fill();
+
+      context.beginPath();
+      // 开始新路径
+      //   context.arc(x, y, radius, Math.PI / 180 * startAngle, Math.PI / 180 * endAngle, anticlockwise);
+      //   context.arc(x, y, radius, 起始弧度, 结束弧度, 是否逆时针);
+      //   context.arc(200, 200, 50, 0, Math.PI / 2);
+
+      context.arc(100, 100, 100, (Math.PI / 180) * 90, (Math.PI / 180) * 180);
+
+      context.stroke();
+
+      context.font = "30px sans-serif";
+      //   context.fillText("HEyLO wrgld", 0, 300);
+      context.strokeText("HEyLO wrgld", 0, 300);
+    </script>
+  </body>
+</html>
