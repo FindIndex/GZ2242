@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <img id="thumb1" src="https://www.runoob.com/images/compatible_firefox.gif" alt="" draggable="true" />
+    <img id="thumb2" src="https://www.runoob.com/images/compatible_chrome.gif" alt="" draggable="true" />
+
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+      }
+    </style>
+
+    <!-- <script>
+      var img = document.querySelector("img");
+      var box = document.querySelector(".box");
+      img.ondragstart = function (event) {
+        console.log("开始拖拽", event);
+        event.dataTransfer.setData("Text", event.target.id);
+      };
+      box.ondragover = function (event) {
+        console.log("over box");
+        event.preventDefault();
+      };
+      box.ondrop = function (event) {
+        // console.log("drop box");
+        // console.log(event.dataTransfer.getData("Text"));
+        box.appendChild(document.querySelector("#" + event.dataTransfer.getData("Text")));
+      };
+    </script> -->
+
+    <script>
+      var imgs = document.querySelectorAll("img");
+      var boxs = document.querySelectorAll(".box");
+      imgs.forEach(function (img) {
+        img.ondragstart = function (event) {
+          // console.log("开始拖拽", event);
+          event.dataTransfer.setData("Text", event.target.id);
+        };
+      });
+      boxs.forEach(function (box) {
+        box.ondragover = function (event) {
+          // console.log("over box");
+          event.preventDefault();
+        };
+        box.ondrop = function (event) {
+          // console.log("drop box");
+          // console.log(event.dataTransfer.getData("Text"));
+          box.appendChild(document.querySelector("#" + event.dataTransfer.getData("Text")));
+        };
+      });
+    </script>
+  </body>
+</html>
