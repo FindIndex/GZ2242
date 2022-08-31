@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <iframe
+      src="http://api.map.baidu.com/marker?location=23,113&title=我的位置&content=百度奎科大厦&output=html&src=webapp.baidu.openAPIdemo "
+      frameborder="0"
+      st
+    ></iframe> -->
+    <!-- <script>
+      navigator.geolocation.getCurrentPosition(function (position) {
+        // console.log(position);
+        document.querySelector("iframe").src =
+          "http://api.map.baidu.com/marker?location=" +
+          position.coords.latitude +
+          "," +
+          position.coords.longitude +
+          "&output=html&src=webapp.baidu.openAPIdemo";
+
+        /* 
+        accuracy: 62  精度
+altitude: null
+altitudeAccuracy: null
+heading: null
+latitude: 23.13423872046693 纬度
+longitude: 113.42315703141539 经度
+speed: null
+        */
+      });
+    </script> -->
+
+    <p></p>
+    <script>
+      navigator.geolocation.watchPosition(function (position) {
+        console.log(position.coords);
+        document.querySelector("p").innerText = position.coords.latitude + "\n" + position.coords.longitude;
+      });
+    </script>
+  </body>
+</html>
