@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <video
+      width="300"
+      height="200"
+      loop
+      src="https://www.runoob.com/try/demo_source/movie.mp4"
+      controls
+      poster="https://www.runoob.com/images/compatible_firefox.gif"
+    >
+<track default kind="captions" srclang="en" src="./en.vtt"></track>
+<track  kind="captions" srclang="zh" src="./zh.vtt"></track>
+</video>
+
+    <script>
+      var video = document.querySelector("video");
+
+      video.oncanplay = function () {
+        //   video.play()
+        //   video.pause()
+
+        console.log(video.duration);
+        console.log(video.autoplay);
+        // console.log(video.buffered);
+        // console.log(video.buffered.start(0));
+        // console.log(video.buffered.end(0));
+        console.log(video.controller);
+        console.log(video.controls);
+        console.log(video.currentSrc);
+        console.log(video.currentTime);
+        console.log(video.ended);
+        // console.log(video.paused);
+        // console.log(video.played);
+
+        // video.playbackRate
+
+        // video.playbackRate = 2;
+        video.volume;
+      };
+
+      video.onloadedmetadata = function (event) {
+        console.log(video.width);
+        console.log("The duration and dimensions " + "of the media and tracks are now known. ");
+      };
+
+      video.onplay = function () {
+        console.log("播放中");
+      };
+      video.onpause = function () {
+        console.log("暂停");
+      };
+      video.ontimeupdate = function () {
+        console.log(video.currentTime);
+      };
+    </script>
+
+    <audio src="https://www.runoob.com/try/demo_source/horse.ogg" controls></audio>
+
+    <input type="range" name="" id="">
+
+    <div class="box"></div>
+    <style>
+        body {
+            background-image: url("../../08-css3/css3-3d-column-chart/600x600.jpg");
+            background-size: cover;
+        }
+        .box {
+            width: 300px;
+            height: 300px;
+            margin-top: 50px;
+            background-color: rgba(7, 170, 224, 0.393);
+            /* filter: blur(30px); */
+            backdrop-filter: blur(10px);
+        }
+    </style>
+  </body>
+</html>
