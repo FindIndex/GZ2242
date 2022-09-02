@@ -1,0 +1,15 @@
+$s: 10px;
+
+@mixin bordered($w: 1px) {
+  border: $w solid red;
+}
+
+body {
+  color: red;
+  width: $s;
+
+  i {
+    color: blue;
+    @include bordered(10px);
+  }
+}

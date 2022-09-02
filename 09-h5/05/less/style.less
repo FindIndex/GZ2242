@@ -1,0 +1,120 @@
+@x: 10px;
+@y: @x + 10px;
+@c1 : lightblue;
+// 变量
+@import "./vars.less";
+
+
+// .bordered {
+//     border: 1px solid @c1;
+// }
+// 不加括号 会当成样式生成
+
+// .bordered() {
+//     border: 1px solid @c1;
+// }
+// 加括号 不会生成 只能调用
+
+.bordered(@w: 1px) {
+    border: @w solid @c1;
+}
+
+// 带参数的混合
+
+// 混合
+
+body {
+    color: red;
+    width: @x * 3;
+    height: @y;
+    .bordered();
+
+
+    color: @s;
+    color: @sa;
+
+    // 嵌套
+    i {
+        color: blue;
+        // .bordered();
+        .bordered(10px);
+    }
+}
+
+
+/* dddddddddddd */
+/* // @规则嵌套和冒泡 */
+// @media (min-width: 768px) {
+//     .box {
+//         width: 750px;
+//     }
+// }
+
+// @media (min-width: 992px) {
+//     .box {
+//         width: 960px;
+//     }
+// }
+
+// @media (min-width: 1200px) {
+//     .box {
+//         width: 1140px;
+//     }
+// }
+// .box {
+//     @media (min-width: 768px) {
+//         width: 750px;
+//     }
+
+//     @media (min-width: 992px) {
+//         width: 960px;
+//     }
+
+//     @media (min-width: 1200px) {
+//         width: 1140px;
+//     }
+// }
+@sm: ~"(min-width: 768px)";
+@md: ~"(min-width: 992px)";
+@lg: ~"(min-width: 1200px)";
+
+.box {
+    @media @sm {
+        width: 750px;
+    }
+
+    @media @md {
+        width: 960px;
+    }
+
+    @media @lg {
+        width: 1140px;
+    }
+}
+
+body {
+    @media @sm {
+        background-color: lightblue;
+    }
+
+    @media @md {
+        background-color: lightcoral;
+    }
+}
+
+
+
+
+// .clearfix {
+//     display: block;
+//     zoom: 1; // 兼容ie
+
+//     &:after {
+//         content: " ";
+//         display: block;
+//         font-size: 0;
+//         height: 0;
+//         clear: both;
+//         visibility: hidden;
+//     }
+// }
