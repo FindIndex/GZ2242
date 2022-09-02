@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <audio src="./988980793.mp3" controls></audio>
+    <hr />
+    <label>
+      <input type="range" name="progress" min="0" value="0" max="100" step="0.01" />
+      <div class="jindu">
+        <div class="mask"></div>
+      </div>
+    </label>
+    <style>
+      label {
+        position: relative;
+        height: 10px;
+        display: block;
+        overflow: hidden;
+      }
+      input {
+        width: 300px;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        display: block;
+      }
+      .jindu {
+        width: 300px;
+        height: 100%;
+        background-color: lightblue;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      .jindu .mask {
+        width: 0%;
+        height: 100%;
+        background-color: red;
+      }
+    </style>
+    <script>
+      var progress = document.querySelector("input[name=progress]");
+      var mask = document.querySelector(".mask");
+      progress.oninput = function () {
+        // console.log(this.value);
+        mask.style.width = this.value + "%";
+
+        audio.currentTime = (this.value * audio.duration) / 100;
+      };
+
+      var audio = document.querySelector("audio");
+      audio.ontimeupdate = function () {
+        mask.style.width = (this.currentTime / this.duration) * 100 + "%";
+      };
+
+      //   p = c / d * 100
+      // c = p * d / 100
+    </script>
+  </body>
+</html>
