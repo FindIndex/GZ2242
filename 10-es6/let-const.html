@@ -122,7 +122,7 @@
       //   a = 20;
     </script>
 
-    <script>
+    <!-- <script>
       //   var tmp = new Date();
 
       //   function f() {
@@ -137,11 +137,50 @@
 
       function f() {
         console.log(tmp);
-        if (true) {
+        if (false) {
           let tmp = "hello world";
         }
       }
       f();
+    </script> -->
+    <!-- <script>
+      let a = 10;
+      a = 20;
+
+      const b = 55;
+      //   b = 66;
+      //   Assignment to constant variable.
+
+      //   const 是常量 不能修改
+
+      //   const c;
+      //   c = 10
+
+      //   const 必须声明的时候同时赋值
+
+      let x = { name: "nick", age: 17 };
+      x.age = 18;
+
+      //   const y = { name: "mark", age: 7 };
+      //   y.age = 8;
+      //   const常量 只保证栈内存不变 无法保证堆内存
+
+      const z = x;
+      x.age = 19;
+
+      //   ES6 声明变量的六种方法
+      //    var let const  function   import class
+    </script> -->
+
+    <script>
+      var a = 10;
+      //   var 声明的变量默认会挂载到 window
+      let b = 20;
+      //   let声明的变量不会挂载到 widnow对象  node.js 没有window
+
+      //  es5 global全局就是 window
+      //  es6 global全局就是 全局
+      var btoa = 12;
     </script>
   </body>
 </html>
