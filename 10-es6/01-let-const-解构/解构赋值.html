@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 数组的解构 -->
+    <script>
+      //   let a = 1;
+      //   let b = 2;
+      //   let c = 3;
+      //   let [a, b, c] = [1, 2, 3];
+      //   let [foo, [[bar], baz]] = [1, [[2], 3]];
+      //   let [, , c] = [1, 2, 3];
+      //   let [a, ...tail] = [1, 2, 3];
+      //   let [a, ...tail] = [1];
+      //   let [a, b, c] = [1];
+    </script>
+
+    <!-- 解构默认值 -->
+    <!-- <script>
+      //   let [a = 15, b = 10, c = 5] = [1];
+      //   let [a = 15, b = 10, c = 5, d = 100] = [1, undefined, null, 0];
+      //   默认值 只在解构的值为undefined 的时候 才会取默认值
+
+      function f() {
+        console.log("aaa");
+      }
+
+      let [x = f()] = [];
+      //   默认值是惰性求值
+    </script> -->
+
+    <!-- 对象的解构赋值 -->
+    <!-- <script>
+      let { foo, bar } = { foo: "aaa", bar: "bbb" };
+      //   let { name, age } = { name: "nick", age: 17 };
+      //   let { name } = { name: "nick", age: 17 };
+      //   let { job = "无业游民" } = { name: "nick", age: 17 };
+
+      let { round, max, random } = Math;
+      console.log(random());
+    </script> -->
+
+    <!-- 如果不希望使用原来的属性名作为变量名 -->
+    <script>
+      //   let { name: n, age: a } = { name: "nick", age: 17 };
+      //   let { name: name, age: age } = { name: "nick", age: 17 };
+      //   简写
+      //   let { name, age } = { name: "nick", age: 17 };
+
+      //   let obj = {
+      //     p: ["Hello", { y: "World" }],
+      //   };
+
+      //   let {
+      //     p: [x, { y }],
+      //     p: p,
+      //   } = obj;
+
+      //   let { name, age, job = "无业" } = { name: "nick", age: 17, job: null };
+      //   //   let { name, ...other } = { name: "nick", age: 17, job: "xxx" };
+
+      //   let x;
+      //   ({ x } = { x: 1 });
+    </script>
+
+    <script>
+      //   function xxx(arr) {
+      //     let x = arr[0];
+      //     let y = arr[1];
+      //     let z = arr[2];
+      //     console.log(x, y, z);
+      //   }
+      function xxx([x, y, z]) {
+        console.log(x, y, z);
+      }
+      xxx([1, 2, 3]);
+
+      //   function yyy(options) {
+      //     let autoplay = options.autoplay || true;
+      //     let dots = options.dots;
+      //     let index = options.index || 1;
+      //     console.log(autoplay, dots, index);
+      //   }
+
+      function yyy({ autoplay = true, dots = false, index = 0 } = {}) {
+        console.log(autoplay, dots, index);
+      }
+      //   yyy({
+      //     dots: true,
+      //     // index: 0,
+      //     autoplay: false,
+      //   });
+      yyy();
+      //   yyy({});
+    </script>
+  </body>
+</html>
