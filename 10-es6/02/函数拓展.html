@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 函数参数的默认值
+      //   function log(x, y) {
+      //     y = y || "World";
+      //     console.log(x, y);
+      //   }
+
+      function log(x, y = "World") {
+        console.log(x, y);
+      }
+
+      log("hello", false);
+      log("hello", 0);
+    </script>
+
+    <script>
+      function foo({ x, y = 5 } = {}) {
+        console.log(x, y);
+      }
+
+      foo({ x: 10, y: 0 });
+      foo({ x: 10, y: null });
+      foo({ x: 10, y: false });
+      foo({ x: 10, y: undefined });
+      foo({});
+      foo();
+
+      //   参数默认值的位置 可以忽略的参数放最后面
+
+      //   foo.length 不能忽略（没有默认值的）的参数的个数
+    </script>
+
+    <!-- <script>
+      function sum(a, ...rest) {
+        console.log(arguments, rest);
+      }
+      sum(1, 2, 3);
+    </script> -->
+
+    <script>
+      //   function xxx() {
+      //     return 123;
+      //   }
+      //   const xxx = () => 123;
+
+      //     function xxx(n) {
+      //       return n;
+      //     }
+      //   const xxx = (n) => n * 2;
+
+      //   const xxx = (x, y = 10) => x + y;
+      //   const xxx = (x, y = 10) => {
+      //     return x + y;
+      //   };
+
+      //   const xxx = (x, y = 10) => {
+      //     return {
+      //       x: x,
+      //       y: y,
+      //     };
+      //   };
+
+      // 对象简写
+      //   const xxx = (x, y = 10) => {
+      //     return { x, y };
+      //   };
+
+      const xxx = (x, y = 10) => ({ x, y });
+      //   const xxx = (x, y = 10) => void { x, y };
+
+      //   function fullname(obj) {
+      //     return obj.firstName + " " + obj.laseName;
+      //   }
+
+      const fullname = ({ firstName, laseName }) => firstName + " " + laseName;
+      fullname({
+        firstName: "nichoals",
+        laseName: "zhaosi",
+      });
+
+      [1, 2, 3].map(function (n) {
+        return n * n;
+      });
+      [1, 2, 3].map((n) => n * n);
+
+      //   const yyy = () => {
+      //     console.log(arguments);
+      //   };
+      //   yyy(1,2,3)
+
+      const yyy = (...nums) => {
+        console.log(nums);
+      };
+      yyy(1, 2, 3);
+
+      /* 
+    1 没有自己的 this
+    2 不能使用 new 
+    3 不能使用 arguments
+    4 不可以使用 yield 命令
+    
+    */
+    </script>
+
+    <!-- <script>
+      function f1() {
+        console.log(this);
+      }
+      f1();
+
+      var obj = {
+        name: "nick",
+        age: 17,
+        f2: f1,
+      };
+
+      obj.f2();
+
+      var f3 = obj.f2;
+      f3();
+    </script> -->
+
+    <!-- <script>
+      const f1 = () => {
+        console.log(this);
+      };
+      f1();
+
+      var obj = {
+        name: "nick",
+        age: 17,
+        f2: f1,
+      };
+
+      obj.f2();
+    </script> -->
+
+    <!-- <script>
+      var obj = {
+        name: "nick",
+        age: 17,
+        f1: () => {
+          console.log(this);
+        },
+      };
+
+      var f2 = obj.f1;
+    </script> -->
+
+    <script>
+      //   function foo() {
+      //     // console.log("outer id:", this.id);
+      //     var _this = this;
+      //     setTimeout(function () {
+      //       console.log("inner id:", _this.id);
+      //     }, 100);
+      //   }
+
+      function foo() {
+        // console.log("outer id:", this.id);
+
+        setTimeout(() => {
+          console.log("inner id:", this.id);
+        }, 100);
+      }
+
+      var id = 21;
+
+      foo.call({ id: 42 });
+    </script>
+
+    <script>
+      function Timer() {
+        this.s1 = 0;
+        this.s2 = 0;
+        // 箭头函数
+        setInterval(() => this.s1++, 1000);
+        // 普通函数
+        setInterval(function () {
+          this.s2++;
+        }, 1000);
+      }
+
+      var timer = new Timer();
+    </script>
+
+    <script>
+      function Dot(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+
+      Dot.prototype.checkPeng = function () {
+        // this这里指向 实例对象
+        dots.forEach(() => {
+          console.log(this);
+        });
+      };
+      var dots = [new Dot(1, 1), new Dot(2, 2), new Dot(3, 3)];
+    </script>
+
+    <script>
+      // 函数柯里化
+      //   function sum(a, b, c) {
+      //     return a + b + c;
+      //   }
+      //   sum(1, 2, 3);
+
+      //   function sum(a) {
+      //     return function (b) {
+      //       return function (c) {
+      //         return a + b + c;
+      //       };
+      //     };
+      //   }
+
+      const sum = (a) => (b) => (c) => a + b + c;
+
+      sum(1)(2)(3);
+    </script>
+  </body>
+</html>

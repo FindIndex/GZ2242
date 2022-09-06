@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+    <script>
+      // 拓展运算符 展开
+      console.log(...[1, 2, 3]);
+      console.log(1, ...[2, 3, 4], 5);
+
+      var nums = [1, 2, 3];
+      var nums1 = [11, 22, 33];
+      //   var nums2 = [0, ...nums];
+      //   var nums2 = [...nums1, ...nums];
+
+      var nums2 = [...nums];
+
+      var nodeList = document.querySelectorAll("ul li");
+
+      var lis = [...nodeList];
+      var lis = Array.prototype.slice.call(nodeList);
+      var lis = Array.from(nodeList);
+
+      //   找到最大
+      Math.max(11, 22, 33);
+      //   Math.max(...nums1);
+      Math.max.apply(null, nums1);
+    </script>
+
+    <script>
+      var nums1 = [11, 22, 33];
+      //   console.log(nums1.keys());
+      //   for (const iterator of nums1.keys()) {
+      //     console.log(iterator);
+      //   }
+      //   for (const iterator of nums1.values()) {
+      //     console.log(iterator);
+      //   }
+      //   for (const iterator of nums1.entries()) {
+      //     console.log(iterator);
+      //   }
+
+      var obj = {
+        name: "nick",
+        age: 17,
+        job: null,
+      };
+
+      console.log(Object.keys(obj));
+      for (const iterator of Object.keys(obj)) {
+        console.log(iterator, obj[iterator]);
+      }
+
+      var seats = [
+        [11, 12, 13, 14],
+        [21, 22, 23, null],
+        [31, 32, 33, null],
+      ];
+
+      seats.flat();
+
+      console.log(nums1[nums1.length - 1]);
+      console.log(nums1.at(0));
+      console.log(nums1.at(-1));
+
+      var arr = new Array(5);
+      arr.fill(null)
+      //   arr.forEach((item) => {
+      //     console.log(item);
+      //   });
+
+      arr.map((n) => 1);
+    </script>
+  </body>
+</html>
