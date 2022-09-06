@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var r = /xyz/i;
+      var r1 = new RegExp(r, "g");
+      var str = "hello world";
+
+      str.match(/r/i);
+      //   igmuy
+      console.log(r.flags);
+
+      //   var regex = /test1/;
+      //   var string = "test1test2test3";
+      //   console.log(string.match(regex));
+      //   console.log(string.matchAll(regex)); for of
+
+      var str = "2022-06-15";
+      var str1 = "2020-11-01";
+
+      //   var reg = /(\d{4})-(\d{2})-(\d{2})/i;
+
+      var reg = /(?<yy>\d{4})-(?<mm>\d{2})-(?<dd>\d{2})/i;
+
+      console.log(str.match(reg));
+
+      //   BigInt
+      //   数值 字符 布尔 undefined null
+      //   数组 对象
+      //   BigInt 的第八种数据类型
+      //   const firstName = message?.body?.user?.firstName || 'default';
+    </script>
+  </body>
+</html>

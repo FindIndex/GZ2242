@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <meta name="referrer" content="never" />
+  </head>
+  <body>
+    <script>
+      var name = "nick";
+      var obj = { name: "nick", age: 17 };
+      var s1 = `hello world`;
+      var s2 = `hello 
+      world`;
+
+      var s3 = `hello world ${name} - ${obj.age}`;
+      var s4 = `hello \` world ${obj.age > 18 ? "成年" : "小崽子"}`;
+    </script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <ul class="list"></ul>
+    <!-- <li class="item">
+      <img
+        style="width: 200px; height: 300px"
+        src="https://i0.hdslb.com/bfs/manga-static/8b843504867408d80c3a75fa2bb7132212379320.jpg"
+        alt=""
+      />
+      <h3>鬼灭之刃</h3>
+    </li> -->
+    <script>
+      $.get(
+        "https://apis.netstart.cn/bcomic/ClassPage",
+        { styleId: -1, areaId: -1, isFinish: -1, order: 0, pageNum: 1, pageSize: 39, isFree: -1 },
+        function (res) {
+          //   console.log(res);
+          let { data } = res;
+          //   console.log(data);
+          $("ul").append(
+            `${data
+              .map(function (item) {
+                return `
+    <li class="item">
+      <img
+        style="width: 200px; height: 300px"
+        src="${item.vertical_cover}"
+        alt=""
+      />
+      <h3>${item.title}</h3>
+    </li>`;
+              })
+              .join("")}`
+          );
+        }
+      );
+    </script>
+
+    <script>
+      let s = "Hello world!";
+
+      s.startsWith("Hello"); // true
+      s.endsWith("!"); // true
+      s.includes("y");
+
+      "na".repeat(3);
+
+      "3".padStart(2, "0");
+      "3".padEnd(4, ".00");
+
+      " hel lo ".trim();
+      "aabbcc".replace("b", "_");
+
+
+      'aabbcc'.replaceAll('b', '_')
+    </script>
+  </body>
+</html>
