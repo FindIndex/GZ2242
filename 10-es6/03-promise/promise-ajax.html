@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            // 成功
+            console.log(JSON.parse(xhr.response));
+          }
+        }
+      };
+
+      xhr.open("GET", "http://www.httpbin.org/get", true);
+      xhr.send();
+    </script> -->
+
+    <!-- <script>
+      function getJson(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              // 成功
+              //   console.log(JSON.parse(xhr.response));
+              callback(JSON.parse(xhr.response));
+            }
+          }
+        };
+
+        xhr.open("GET", url, true);
+        xhr.send();
+      }
+
+      //   var n = 0
+      // 每次成功一个 n++ ，没有解决结果顺序问题
+
+      // var arr = []
+      getJson("http://www.httpbin.org/get", function (res) {
+        console.log(res);
+        // arr[0] = res
+      });
+      getJson("http://www.httpbi.org/get?name=nick&age=17", function (res) {
+        console.log(res);
+        // arr[1] = res
+      });
+    </script> -->
+
+    <script>
+      function getJson(url, callback) {
+        return new Promise((resolve, reject) => {
+          let xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                // 成功
+                resolve(JSON.parse(xhr.response));
+              } else {
+                reject(xhr);
+              }
+            }
+          };
+
+          xhr.open("GET", url, true);
+          xhr.send();
+        });
+      }
+
+      var p1 = getJson("http://www.httpbin.org/get");
+      var p2 = getJson("http://www.httpbin.org/get?name=nick&age=17");
+
+      //   p1.then((res) => console.log(res));
+      //   p2.then((res) => console.log(res));
+
+      //   考虑问题
+      // 1 如果需要两个都成功，才做某个事情。
+      var allP = Promise.all([p1, p2]);
+      allP
+        .then((res) => {
+          console.log(res);
+        })
+        .catch(() => {
+          console.log("失败");
+        });
+
+      // 2 如果p2 ajax发起 需要依赖 p1的结果
+      //   getJson("ip换城市").then((城市)=> {
+      //     getJson("城市换天气").then((天气)=> {
+      //         console.log(天气);
+      //     })
+      //   })
+      //   地狱回调
+
+      // 竞速
+      //   var raceP = Promise.race([p1, p2]);
+      //   raceP
+      //     .then((res) => {
+      //       console.log(res.args);
+      //     })
+      //     .catch(() => {
+      //       console.log("失败");
+      //     });
+    </script>
+  </body>
+</html>

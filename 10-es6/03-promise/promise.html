@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      //   let p = new Promise();
+      //   let p = new Promise(function () {});
+      let p = new Promise(function (resolve, reject) {
+        // resolve函数 成功的时候调用的函数,
+        // reject函数 失败的时候调用的函数
+
+        setTimeout(() => {
+          var n = Math.random();
+          if (n > 0.5) {
+            resolve(n);
+          } else {
+            reject(n);
+          }
+        }, 3000);
+      });
+
+      //   then 两个参数 函数，
+      // 第一个就是成功的时候会执行的函数 就是 resolve
+      // 第二个就是失败的时候会执行的函数 就是 reject
+      p.then(
+        function (res) {
+          console.log("成功了", res);
+        },
+        function (res) {
+          console.log("失败了", res);
+        }
+      );
+    </script> -->
+
+    <!-- <script>
+      function delay(ms, calback) {
+        setTimeout(calback, ms, Math.random());
+      }
+
+      delay(1000, function (res) {
+        console.log(res);
+      });
+    </script> -->
+
+    <script>
+      function delay(ms) {
+        return new Promise((resolve, reject) => {
+          console.log("promise 初始化");
+          setTimeout(resolve, ms, Math.random());
+        });
+      }
+
+      var p = delay(1000);
+      var tp = p.then((res) => {
+        console.log(res);
+      });
+    </script>
+
+    <script>
+      let promise = new Promise(function (resolve, reject) {
+        console.log("Promise");
+        resolve();
+      });
+
+      //   then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行
+      promise.then(function () {
+        console.log("resolved.");
+      });
+
+      console.log("Hi!");
+
+      // Promise
+      // Hi!
+      // resolved
+    </script>
+  </body>
+</html>
