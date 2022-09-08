@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let s = Symbol();
+      console.log(typeof s);
+
+      let s1 = Symbol("foo");
+      let s2 = Symbol("bar");
+
+      console.log(s1);
+      console.log(s2);
+
+      console.log(s2.toString());
+      console.log(s2.description);
+
+      var obj = {
+        a: 10,
+        b: 20,
+      };
+
+      obj[s1] = 123;
+      obj.s1 = 456;
+    </script>
+  </body>
+</html>
