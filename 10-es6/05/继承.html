@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Animal(name) {
+        this.name = name;
+      }
+
+      Animal.prototype.eat = function () {
+        return this.name + " eating";
+      };
+      Animal.prototype.greet = function () {
+        return "hello" + " my name is " + this.name;
+      };
+    </script>
+
+    <!-- 自编名字 借用函数组合 -->
+    <!-- <script>
+      //   var a1 = new Animal("Tom",);
+      //   var a2 = new Animal("ahuang");
+
+      function Cat(name) {
+        Animal.apply(this, arguments);
+      }
+      Cat.prototype = Object.assign({}, Animal.prototype);
+      Cat.prototype.constructor = Cat;
+
+      var tom = new Cat("Tom");
+    </script> -->
+    <script>
+      function Cat(name) {
+        Animal.apply(this, arguments);
+      }
+
+      function Fn() {}
+      Fn.prototype = Animal.prototype;
+      Cat.prototype = new Fn();
+      Cat.prototype.constructor = Cat;
+
+      var tom = new Cat("Tom");
+    </script>
+
+    <!-- 原型链继承 核心： 将父类的实例作为子类的原型 -->
+    <!-- <script>
+      function Cat(name) {
+        this.name = name;
+      }
+      Cat.prototype = new Animal();
+      //   Cat.prototype.name = "XXX";
+      Cat.prototype.pashu = function () {
+        return "pashu";
+      };
+
+      var c1 = new Cat("Tom");
+
+      console.log(c1);
+      console.log(c1.eat());
+      console.log(c1.greet());
+      console.log(c1 instanceof Cat);
+      console.log(c1 instanceof Animal);
+    </script> -->
+
+    <!-- 借用构造继承 核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型） -->
+    <!-- <script>
+      function Cat(name) {
+        Animal.call(this, name);
+      }
+
+      var c1 = new Cat("Tom");
+    </script> -->
+
+    <!-- 实例继承 核心：为父类实例添加新特性，作为子类实例返回 -->
+    <!-- <script>
+      function Cat(name) {
+        var instance = new Animal(name);
+        instance.constructor = Cat;
+        return instance;
+      }
+
+      var c1 = Cat("Tom");
+    </script> -->
+
+    <!-- <script>
+      //   组合继承 核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
+
+      function Cat(name) {
+        Animal.call(this, name);
+      }
+      Cat.prototype = new Animal();
+      Cat.prototype.constructor = Cat;
+
+      var c1 = new Cat("Tom");
+    </script> -->
+
+    <!-- 寄生组合继承 -->
+    <!-- <script>
+      function Cat(name) {
+        Animal.call(this, name);
+      }
+
+      (function () {
+        var Super = function () {};
+        Super.prototype = Animal.prototype;
+        Cat.prototype = new Super();
+        Cat.prototype.constructor = Cat;
+      })();
+
+      var c1 = new Cat("Tom");
+    </script> -->
+  </body>
+</html>
