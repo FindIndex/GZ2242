@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3></h3>
+
+    <!-- <script>
+      // 私有变量
+      var obj = {
+        name: "nick",
+        age: 17,
+        job: "xxx",
+      };
+
+      document.querySelector("h3").innerText = obj.job;
+
+      setInterval(() => {
+        obj.job = Date.now();
+        document.querySelector("h3").innerText = obj.job;
+      }, 2000);
+
+      setInterval(() => {
+        obj.job = Math.random();
+        document.querySelector("h3").innerText = obj.job;
+      }, 3000); 
+    </script>-->
+    <script>
+      // 私有变量
+      var obj = {
+        name: "nick",
+        age: 17,
+        _job: "xxx",
+      };
+
+      Object.defineProperty(obj, "job", {
+        get: function () {
+          return this._job;
+        },
+        set: function (value) {
+          this._job = value;
+          console.log("修改了job 属性");
+          document.querySelector("h3").innerText = obj.job;
+        },
+      });
+
+      setInterval(() => {
+        obj.job = Date.now();
+      }, 2000);
+
+      setInterval(() => {
+        obj.job = Math.random();
+      }, 3000);
+    </script>
+  </body>
+</html>

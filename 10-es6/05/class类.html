@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      function Dot(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+      }
+
+      Dot.prototype.xxx = function () {
+        console.log("xxx");
+      };
+      Dot.prototype.yyy = "土豪";
+
+      var d1 = new Dot(10, 10);
+      console.log(d1);
+      //   console.log(Object.keys(d1));
+      //   for (key in d1) {
+      //     console.log(key);
+      //   }
+
+      console.log(d1.__proto__ === Dot.prototype);
+      //   实例对象的__proto__ 就是 构造函数的原型对象
+
+      console.log(d1.constructor === Dot);
+      //   d1 的构造函数就是 Dot
+    </script> -->
+
+    <script>
+      class Dot {
+        _z = 123;
+        static _z1 = 456;
+        #z2 = 789;
+        constructor(x = 0, y = 0) {
+          this.x = x;
+          this.y = y;
+        }
+        // constructor 定义自己的属性 或方法 ,塑造this
+        // constructor 可以省略不写 没有自己的属性或方法
+        // JavaScript 引擎会自动为它添加一个空的constructor()方法。
+        xxx() {
+          console.log("xxx", this, this.#z2);
+
+          
+        }
+
+        get job() {
+          return this._z;
+        }
+        set job(value) {
+          this._z = value;
+          console.log("job 设置");
+        }
+
+        static zzz() {
+          console.log("yyy");
+        }
+      }
+
+      Dot.prototype.yyy = "土豪";
+      //   继承的属性或方法
+      //   实例方法 实例对象使用
+
+      var d1 = new Dot(10, 10);
+      var d2 = new Dot(20, 20);
+
+      //   d1.__proto__.zzz = 456;
+
+      //   Dot.zzz = 789;
+      //   静态属性 构造器使用
+    </script>
+  </body>
+</html>

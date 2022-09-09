@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 子类（派生类）继承父类（基类）
+
+      class Man {
+        constructor(name, age, gender) {
+          this.name = name;
+          this.age = age;
+          this.gender = gender;
+        }
+
+        eat() {
+          return `${this.name} 吃饱了`;
+        }
+
+        static xxx() {
+          return "xxx";
+        }
+      }
+
+      let m1 = new Man("nick", 17, 1);
+      let m2 = new Man("marry", 16, 0);
+
+      class SuperMan extends Man {
+        constructor(name, age, gender, fly) {
+          super(name, age, gender, fly);
+          // 调用父类的constructor(name, age, gender)
+          //   super 代表 父类的构造函数
+          this.fly = fly;
+        }
+
+        static xxx() {
+          return super.xxx() + " 子类";
+          //   super 当成了对象使用
+          // 如果是在静态方法内部使用  代表父类本身 Man
+        }
+
+        eat() {
+          return super.eat() + "吃电池";
+          //   super 当成了对象使用
+          // 如果是在实例方法内部使用  代表父类的原型对象 Man.prototype
+        }
+
+        flying() {
+          if (this.fly) {
+            return `${this.name} 正在飞`;
+          } else {
+            return `${this.name} 正在跳`;
+          }
+        }
+      }
+
+      let s1 = new SuperMan("蜘蛛侠", 29, 1, false);
+      let s2 = new SuperMan("超人", 35, 1, true);
+    </script>
+  </body>
+</html>
