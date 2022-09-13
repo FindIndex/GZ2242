@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <xxx-yyy :name="friends[0]"></xxx-yyy>
+      <xxx-yyy :name="friends[1]"></xxx-yyy>
+      <xxx-yyy :name="friends[2]"></xxx-yyy> -->
+      <xxx-yyy v-for="f in friends" :name="f"></xxx-yyy>
+    </div>
+    <script>
+      Vue.component("xxx-yyy", {
+        template: "<p>name: {{name}}</p>",
+        props: ["name"],
+      });
+
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+
+        // 状态
+        data: {
+          friends: ["nick", "marry", "tom"],
+        },
+      });
+    </script>
+
+    <!-- <div id="app">
+      <ul>
+        <li v-for="todo in todos">{{todo.text}}</li>
+      </ul>
+    </div>
+    <script>
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+
+        // 状态
+        data: {
+          todos: [
+            { text: "学习 JavaScript" },
+            { text: "学习 Vue" },
+            { text: "整个牛项目" },
+          ],
+        },
+      });
+    </script> -->
+
+    <!-- <div id="app">
+      <ul>
+        <todo-item
+          v-for="todo in todos"
+          v-bind:xxx="todo"
+          v-bind:title="123"
+        ></todo-item>
+      </ul>
+    </div>
+    <script>
+      Vue.component("todo-item", {
+        // template: "<li>{{$attrs.xxx.text}}</li>",
+        props: ["xxx"],
+        template: "<li>{{xxx.text}}</li>",
+        data: function () {
+          return {
+            msg: "hello",
+          };
+        },
+        // 组件内部的data 必须是一个函数 返回一个对象
+      });
+      // Vue.component声明组件的第二个参数
+      //   实际上就类似 new Vue()携带的参数 唯一区别就是没有 el属性 换成 template
+
+      var app = new Vue({
+        el: "#app",
+
+        data: {
+          msg: "hello world",
+          todos: [
+            { text: "学习 JavaScript" },
+            { text: "学习 Vue" },
+            { text: "整个牛项目" },
+            { text: "找个好工作" },
+          ],
+        },
+      });
+    </script> -->
+  </body>
+</html>
