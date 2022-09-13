@@ -13,6 +13,7 @@
       <!-- <xxx-yyy :name="friends[0]"></xxx-yyy>
       <xxx-yyy :name="friends[1]"></xxx-yyy>
       <xxx-yyy :name="friends[2]"></xxx-yyy> -->
+      <h3>{{msg}}</h3>
       <xxx-yyy v-for="f in friends" :name="f"></xxx-yyy>
     </div>
     <script>
@@ -27,6 +28,7 @@
 
         // 状态
         data: {
+          msg: "hello",
           friends: ["nick", "marry", "tom"],
         },
       });

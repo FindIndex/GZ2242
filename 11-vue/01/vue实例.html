@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3 id="h3">{{a}}</h3>
+      <h3 v-if="b">{{b}}</h3>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        // 根元素
+        el: "#app",
+
+        // 状态
+        data: {
+          a: 10,
+          b: null,
+
+          newTodoText: "",
+          visitCount: 0,
+          hideCompletedTodos: false,
+          todos: [],
+          error: null,
+        },
+
+        // 实例生命周期钩子
+
+        beforeCreate() {
+          console.log("创建之前", this, this.a);
+        },
+        // 访问不到状态
+
+        created: function () {
+          console.log("创建完成", this, this.a);
+          console.log("创建完成", document.querySelector("#h3").innerHTML);
+          //  这个时候还访问不到 dom元素
+        },
+        // 最早可以访问到状态
+
+        mounted() {
+          console.log(
+            "挂载完成",
+            this,
+            this.a,
+            document.querySelector("#h3").innerHTML
+          );
+        },
+        // 最早可以访问 dom
+      });
+
+      //   console.log(vm.a);
+      //   console.log(vm.$data.todos === vm.todos);
+
+      //   console.log(vm.$data);
+      //   console.log(vm.$el);
+
+      //   侦听器 监听某一个状态的变化 就可以做 除了默认的更新视图的行为  之外的其他的自己编写的代码
+      vm.$watch("a", function (newValue, oldValue) {
+        console.log(newValue, oldValue);
+      });
+    </script>
+  </body>
+</html>
