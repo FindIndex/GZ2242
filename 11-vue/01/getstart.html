@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3 :title="xxx">hello {{xxx}}</h3>
+      <p>这是一个vue示例</p>
+      <h5 v-bind:title="msg">{{msg}}</h5>
+
+      <a :href="link">链接</a>
+      <hr />
+
+      <li>
+        <img :src="manhua.vertical_cover" width="200" alt="" />
+        <h3>{{manhua.title}}</h3>
+      </li>
+    </div>
+    <!-- 上面的代码不是 html代码   模板-->
+    <script>
+      //   console.log(Vue);
+      //   Vue 是一个构造函数
+      //   app就是一个Vue的实例对象
+      var app = new Vue({
+        el: "#app",
+
+        data: {
+          xxx: "world",
+          msg: "一切反动派都是纸老虎。",
+          link: "http://www.baidu.com",
+          manhua: {
+            season_id: 25717,
+            title: "鬼灭之刃",
+            horizontal_cover: "http://i0.hdslb.com/bfs/manga-static/78876fdef412fa995ae5cce7cc30af1ff61f4ac7.png",
+            square_cover: "http://i0.hdslb.com/bfs/manga-static/68a5c694e59b37f58c03530226a24a66933adb3a.png",
+            vertical_cover: "https://i0.hdslb.com/bfs/manga-static/8b843504867408d80c3a75fa2bb7132212379320.jpg",
+            is_finish: 1,
+            status: 0,
+            last_ord: 208,
+            total: 208,
+            release_time: "",
+            last_short_title: "206",
+            discount_type: 0,
+            allow_wait_free: false,
+            type: 0,
+          },
+        },
+      });
+      //   对象作为参数 el代表用接管哪一个元素（以某一个元素作为根元素）
+      //   data 是一个对象 代表Vue实例对象 所需要的状态（变量 对象的属性）
+      //   现在数据和 DOM 已经被建立了关联，所有东西都是响应式的
+
+      console.log(app.xxx);
+
+      setInterval(() => {
+        app.xxx = Date.now();
+      }, 1000);
+    </script>
+  </body>
+</html>
