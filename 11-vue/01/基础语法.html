@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{msg}}</h3>
+      <h3>{{user.name}}</h3>
+      <h3>{{user.age > 18 ? "成年" :"未成年" }}</h3>
+
+      <h3 v-bind:title="msg">{{xxx(10) }}</h3>
+      <!-- v-bind:title  v-xxx Vue的指令 -->
+
+      <h1 v-if="seen">根据条件是否渲染</h1>
+      <h1 v-else>条件为假</h1>
+      <!-- h1元素 是否需要渲染 取决于 seen的值 -->
+
+      <hr />
+
+      <!-- <p>{{nums[0]}}</p>
+      <p>{{nums[1]}}</p> -->
+
+      <!-- <p v-for="xxx in xxxs"></p> -->
+      <p v-for="item in nums">{{item}}</p>
+      <button v-on:click="add">add</button>
+
+      <ul>
+        <li v-for="todo in todos">{{todo.text}}</li>
+      </ul>
+
+      <hr />
+    </div>
+
+    <script>
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+
+        // 状态
+        data: {
+          msg: "hello world",
+          user: {
+            name: "nick",
+            age: 17,
+          },
+          seen: true,
+
+          nums: [11, 22, 33, 44],
+          todos: [{ text: "学习 JavaScript" }, { text: "学习 Vue" }, { text: "整个牛项目" }],
+        },
+
+        // 方法
+        methods: {
+          xxx: function (n) {
+            return n * 2;
+          },
+          add: function () {
+            // 方法内部的this指向 vue实例对象
+            // console.log(this.nums);
+            // this.nums.push(55);
+            // Vue在此做了增强处理 push pop shift unshift splice sort reverse 改变原始数组的也可以使用
+            // ***********重点************
+            // this.nums[1] = 2222;
+            // this.nums.length = 1;
+            // 状态改变 视图不会更新
+            // 1. 不能直接通过数组的下标去更新
+            // 2. 不能通过数组的长度更新
+            // 最靠谱的方法 应该是返回一个全新的数组 一层的深拷贝就可以
+            // 数组方法 改变原始数组的（变更方法 变异方法） 和  不改变原始数组的（非变更方法 非变异方法）
+
+            this.nums = this.nums.filter((n) => n % 2 === 0);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
