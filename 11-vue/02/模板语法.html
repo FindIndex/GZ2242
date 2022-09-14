@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <mark>{{Math.random()}}</mark>
+
+      <p>Message: {{ msg }}</p>
+      <!-- 文本插值 -->
+      <p v-once>once: {{ msg }}</p>
+
+      <p>{{rawHtml}}</p>
+      <p v-text="rawHtml">hello world</p>
+      <p v-html="rawHtml"></p>
+      <!-- 原始 html内容  xss攻击 -->
+
+      <p v-bind:title="msg">dddd</p>
+      <!-- 绑定属性 -->
+      <button :disabled="xxx">btn</button>
+
+      <p>{{count * 2}}</p>
+      <p>{{msg.split('').reverse().join('')}}</p>
+      <div :id="'list-' + msg">xccccc</div>
+      <!-- 任意表达式 -->
+
+      <div>{{Math.random()}}</div>
+      <!-- <p>{{Math.random()}}</p> -->
+
+      <hr />
+
+      <p v-if="seen">现在你看到我了</p>
+      <!-- v-xxx 指令 -->
+      <!-- 指令的参数  v-bind:xxx v-on:yyyy -->
+
+      <a href="http://www.baidu.com" @click.prevent="clickHandler">链接</a>
+      <!-- .prevent 阻止默认事件的 修饰符 -->
+    </div>
+
+    <script>
+      var vm = new Vue({
+        // 根元素
+        el: "#app",
+
+        // 状态
+        data: {
+          msg: "hello",
+          rawHtml:
+            '<span style="color: red" onclick="console.log(123)">This should be red.</span>',
+          //  XSS 攻击
+          // 绝不要对用户提供的内容使用插值
+          xxx: null,
+          count: 10,
+          seen: true,
+        },
+
+        methods: {
+          clickHandler: function () {
+            console.log(123);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
