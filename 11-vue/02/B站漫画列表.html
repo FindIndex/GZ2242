@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- styles -->
+      <p>{{options}}</p>
+      <ul>
+        <li>全部</li>
+        <li
+          v-for="style in filters?.styles"
+          @click="options = {...options, style_id: style.id}"
+        >
+          {{style.name}}
+        </li>
+      </ul>
+      <hr />
+      <ul>
+        <li>全部</li>
+        <li
+          v-for="area in filters?.areas"
+          @click="options = {...options, area_id: area.id}"
+        >
+          {{area.name}}
+        </li>
+      </ul>
+      <hr />
+      <ul>
+        <li>全部</li>
+        <li
+          v-for="statu in filters?.status"
+          @click="options = {...options, is_finish: statu.id}"
+        >
+          {{statu.name}}
+        </li>
+      </ul>
+
+      <hr />
+      <ul>
+        <li v-for="comic in comics">{{comic.title}}</li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          filters: null,
+          options: {
+            style_id: -1,
+            area_id: -1,
+            is_finish: -1,
+            order: 0,
+            is_free: -1,
+          },
+          comics: [],
+        },
+
+        created() {
+          axios.get("https://apis.netstart.cn/mbcomic/AllLabel").then((res) => {
+            // console.log(res.data.data);
+            this.filters = res.data.data;
+          });
+        },
+
+        watch: {
+          options: function (newOptions) {
+            // console.log(JSON.stringify(newOptions));
+            axios
+              .get("https://apis.netstart.cn/mbcomic/ClassPage", {
+                params: newOptions,
+              })
+              .then((res) => {
+                // console.log(res.data.data);
+                this.comics = res.data.data;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
