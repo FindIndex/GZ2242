@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  </head>
+  <body>
+    <!-- <script>
+      //   console.log(axios);
+      //   axios.get("https://www.baidu.com/sugrec?ie=utf-8&prod=wise&wd=huawei");
+      axios
+        .get("https://www.baidu.com/sugrec", {
+          params: {
+            ie: "utf-8",
+            prod: "wise",
+            wd: "huawei",
+          },
+        })
+        .then(function (res) {
+          console.log(res.data);
+        });
+    </script> -->
+    <div id="app">
+      <input type="text" v-model="value" />
+      <ul>
+        <!-- <li>华为matep50</li> -->
+        <li v-for="o in suggests">{{o.q}}</li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          value: "",
+          suggests: [],
+        },
+
+        computed: {
+          options: function () {
+            return {
+              ie: "utf-8",
+              prod: "wise",
+              wd: this.value,
+            };
+          },
+        },
+
+        methods: {
+          getSuggests: function (options) {
+            axios
+              .get("https://www.baidu.com/sugrec", {
+                params: options,
+              })
+              .then((res) => {
+                // console.log(res.data, this);
+                this.suggests = res.data.g;
+              });
+          },
+        },
+
+        created() {
+          //   console.log(this.getSuggests);
+          this.debouncedGetSuggests = _.debounce(this.getSuggests, 300);
+          //   this指向 vm 实例对象
+          // 对象上挂载某个属性 这是这个属性不会响应
+        },
+
+        watch: {
+          options: function (n) {
+            // console.log(n);
+            if (n.wd) {
+              this.debouncedGetSuggests(n);
+            } else {
+              this.suggests = [];
+            }
+          },
+        },
+      });
+    </script>
+
+    <!-- 作业  https://apis.netstart.cn/mbcomic/#/?id=%e5%88%86%e7%b1%bb%e7%ad%9b%e9%80%89%e7%bb%93%e6%9e%9c%e5%88%97%e8%a1%a8  -->
+  </body>
+</html>
