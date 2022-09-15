@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+    <div id="app">
+      <!-- <button>btn 1</button><button>btn 2</button><button>btn 3</button> -->
+      <button
+        v-for="(tab,index) in tabs"
+        @click="tabIndex =index"
+        :class="{active: tabIndex === index}"
+      >
+        {{ tab.text }}
+      </button>
+
+      <p v-if="index=== tabIndex" v-for="(tab, index) in tabs">
+        {{ tab.content }}
+      </p>
+      <!-- v-if v-for写在同一个元素 v-for有更高的优先级 -->
+      <!-- 不要这样用 -->
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          tabIndex: 0,
+          tabs: [
+            {
+              text: "btn 1",
+              content: "content1",
+            },
+            {
+              text: "btn2",
+              content: "content2",
+            },
+            {
+              text: "btn 3",
+              content: "content3",
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>

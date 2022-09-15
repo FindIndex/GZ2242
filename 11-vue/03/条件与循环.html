@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-if="awesome">Vue is awesome!</h1>
+      <h1 v-else>Oh no 😢</h1>
+      <!-- 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。 -->
+
+      <hr />
+      <!-- 不可见的空的包裹元素 -->
+      <template v-if="awesome">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+
+      <hr />
+
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input :key="111" placeholder="Enter your username" />
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input :key="22" placeholder="Enter your email address" />
+      </template>
+      <br />
+      <button
+        @click="loginType =  loginType==='username' ? 'email' :'username'"
+      >
+        toggle
+      </button>
+      <!-- 当切换元素的时候 原来的输入还在 那就说明vue 并没有删除原来的input  
+        而是简单的修改了 input元素的 placeholder属性-->
+      <!-- Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。 -->
+
+      <!--  Vue 为你提供了一种方式来表达“这两个元素是完全独立的，不要复用它们”。只需添加一个具有唯一值的 key attribute 即可： -->
+
+      <h1 v-if="awesome">fgdsfgfgf</h1>
+      <h1 v-show="awesome">fgdsfgfgf</h1>
+
+      <hr />
+      <ul>
+        <li v-for="(n,i) of nums" :key="n">{{n}}--{{i}}</li>
+      </ul>
+      <!-- 不知道要不要 那就写key 不要使用对象数组作为 key 的值 -->
+      <!-- 一定是唯一值， 迫不得已用下标 -->
+
+      <hr />
+
+      <ul>
+        <li v-for="(value, key, index) in person">
+          {{value}}-{{key}}-{{index}}
+        </li>
+      </ul>
+
+      <hr />
+      <p>{{person.age}}</p>
+      <button @click="xxx">add</button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          awesome: true,
+          loginType: "username",
+
+          nums: [11, 22, 33],
+          person: {
+            name: "nick",
+            age: 17,
+            job: null,
+          },
+        },
+
+        methods: {
+          xxx: function () {
+            // vm.person.xxx = 123;
+            // this.person = { ...this.person, xxx: 123 };
+            // this.person = Object.assign({}, this.person, { xxx: 123 });
+            // Vue.set(this.person, "xxx", 123);
+            this.$set(this.person, "xxx", 123);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
