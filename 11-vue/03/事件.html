@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      .bigbox {
+        width: 300px;
+        height: 300px;
+        background-color: lightblue;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(173, 61, 169);
+      }
+      .smallbox {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(54, 100, 14);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{counter}}</h3>
+      <button @click="counter++">add1</button>
+      <button @click="add">add2</button>
+      <hr />
+      <button @click="addn(5)">+5</button>
+      <button @click="addn(10, $event)">+10</button>
+      <!-- 有时也需要在内联语句处理器中访问原始的 DOM 事件。可以用特殊变量 $event 把它传入方法 -->
+
+      <hr />
+
+      <!-- 事件修饰符 -->
+      <a href="http://www.baidu.com" @click.prevent="add">链接</a>
+
+      <!-- <div class="bigbox" @click="bigbox"> -->
+      <!-- <div class="bigbox" @click.self="bigbox"> -->
+      <!-- <div class="bigbox" @click.capture="bigbox"> -->
+      <div class="bigbox" @click.ctrl.exact="bigbox">
+        bigbox
+        <div class="box" @click="box">
+          box
+          <div class="smallbox" @click="smallbox">smallbox</div>
+        </div>
+      </div>
+
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        @keyup.enter="keyupHandler"
+      ></textarea>
+    </div>
+
+    <!-- 事件修饰符 
+        .stop
+        .prevent
+        .capture
+        .self
+        .once
+        
+        .passive
+-->
+    <!-- 按键修饰符
+        .enter
+        .tab
+        .delete (捕获“删除”和“退格”键)
+        .esc
+        .space
+        .up
+        .down
+        .left
+        .right
+    -->
+
+    <!-- 系统修饰键
+    .ctrl
+    .alt
+    .shift
+    .meta
+    -->
+
+    <!-- 鼠标按钮修饰符 
+    .left
+    .right
+    .middle
+    -->
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          counter: 0,
+        },
+
+        methods: {
+          add: function (event) {
+            console.log(event);
+            this.counter++;
+          },
+          //   默认不带参数 第一个就是event
+
+          addn: function (n, event) {
+            console.log(n, event);
+            this.counter += n;
+          },
+          //   如果携带参数 第一个就是参数
+
+          bigbox: function () {
+            console.log("bigbox");
+          },
+          box: function () {
+            console.log("box");
+          },
+          smallbox: function () {
+            console.log("smallbox");
+          },
+
+          keyupHandler: function (event) {
+            console.log(event.code);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
