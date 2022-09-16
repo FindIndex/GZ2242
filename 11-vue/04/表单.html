@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="value" />
+
+      <textarea name="" id="" cols="30" rows="10" v-model="value">
+xxx yyy </textarea
+      >
+
+      <input type="checkbox" v-model="checked" />
+
+      <hr />
+
+      <input type="radio" name="gender" value="男" v-model="gender" />
+      <input type="radio" name="gender" value="女" v-model="gender" />
+
+      <hr />
+      <input type="checkbox" name="fav" v-model="fav" value="苹果" />
+      <input type="checkbox" name="fav" v-model="fav" value="葡萄" />
+      <input type="checkbox" name="fav" v-model="fav" value="香蕉" checked />
+      <hr />
+
+      <select name="car" id="" v-model="car">
+        <option value="BMW">BMW</option>
+        <option value="BENZ">BENZ</option>
+        <option value="BYD">BYD</option>
+        <option value="YD">YD</option>
+      </select>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          value: "hello",
+          checked: true,
+          gender: "女",
+          fav: ["葡萄"],
+          car: "YD",
+        },
+      });
+    </script>
+  </body>
+</html>

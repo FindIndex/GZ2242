@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <!-- <input type="checkbox" v-model="allCheck" /> -->
+        <!-- 计算属性不能修改 -->
+        <input type="checkbox" :checked="allCheck" @change="toggleAllTodos" />
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo" />
+      </header>
+      <ul>
+        <li v-for="todo in todos" :key="todo.id">
+          <!-- <input type="checkbox" v-model="todo.finish" /> -->
+          <input
+            type="checkbox"
+            :checked="todo.finish"
+            @change="toggleTodo(todo)"
+          />
+          <span>{{todo.text}}</span>
+          <i @click="deleteTodo(todo.id)">X</i>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          newTodo: "",
+          todos: JSON.parse(localStorage.getItem("todos")) || [],
+        },
+
+        computed: {
+          allCheck: function () {
+            return this.todos.every((o) => o.finish);
+          },
+        },
+
+        methods: {
+          addTodo: function () {
+            // console.log(123);
+            this.todos = [
+              ...this.todos,
+              {
+                id: this.todos.length
+                  ? Math.max(...this.todos.map((o) => o.id)) + 1
+                  : 1,
+                text: this.newTodo,
+                finish: false,
+              },
+            ];
+
+            this.newTodo = "";
+          },
+
+          deleteTodo: function (id) {
+            console.log("delete", id);
+            // this.todos.splice()
+            this.todos = this.todos.filter((o) => o.id !== id);
+          },
+
+          toggleTodo: function (todo) {
+            console.log("toggle", todo);
+            // todo.finish = !todo.finish;
+            this.todos = this.todos.map((o) => {
+              if (o.id === todo.id) {
+                return { ...o, finish: !o.finish };
+              } else {
+                return o;
+              }
+            });
+          },
+
+          toggleAllTodos: function (event) {
+            this.todos = this.todos.map((o) => ({
+              ...o,
+              //   finish: !this.allCheck,
+              finish: event.target.checked,
+            }));
+          },
+        },
+
+        watch: {
+          todos: function (newTodos) {
+            console.log("改变了todos");
+            localStorage.setItem("todos", JSON.stringify(newTodos));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
