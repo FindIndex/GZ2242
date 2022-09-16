@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- <div id="app">
+      <h3>parent {{n}}</h3>
+      <hr />
+      <xxx-yyy :pn="n"></xxx-yyy>
+    </div>
+
+    <script>
+      Vue.component("xxx-yyy", {
+        props: ["pn"],
+        template: "<button @click='pn=20'>btn {{pn}}</button>",
+      });
+      //   子组件不能直接修改 props
+      // 基本类型会报错 能响应  复杂类型不报错 能响应(也要杜绝使用)
+
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          n: 10,
+        },
+      });
+    </script> -->
+
+    <!-- 修改复杂类型 -->
+    <!-- <div id="app">
+      <h3>parent {{n}}</h3>
+      <hr />
+      <xxx-yyy :pn="n"></xxx-yyy>
+    </div>
+
+    <script>
+      Vue.component("xxx-yyy", {
+        props: ["pn"],
+        template: "<button @click='pn.xxx.count=200'>btn {{pn}}</button>",
+      });
+      //   子组件不能直接修改 props
+
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          n: {
+            age: 10,
+            xxx: {
+              count: 100,
+            },
+          },
+        },
+
+        watch: {
+          n: function (n) {
+            console.log(n);
+          },
+        },
+      });
+    </script> -->
+
+    <!-- 子通知父  -->
+    <!-- <div id="app">
+      <h3>parent {{n}}</h3>
+      <hr />
+      <xxx-yyy :pn="n" @an-hao="daqian"></xxx-yyy>
+      
+    </div>
+
+    <script>
+      Vue.component("xxx-yyy", {
+        props: ["pn"],
+        template: "<button @click='clickHandler'>btn {{pn}}</button>",
+        methods: {
+          clickHandler: function () {
+            console.log("child clickHandler");
+            //
+            this.$emit("an-hao");
+          },
+        },
+      });
+
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          n: 10,
+        },
+
+        methods: {
+          daqian: function () {
+            // console.log("parent daqian");
+            this.n--;
+          },
+        },
+      });
+    </script> -->
+
+    <!-- 子向父 通知事件 传值 -->
+    <!-- <div id="app">
+      <h3>parent {{n}}</h3>
+      <hr />
+      <xxx-yyy :pn="n" @custom-event="decrement"></xxx-yyy>
+    </div>
+
+    <script>
+      Vue.component("xxx-yyy", {
+        props: ["pn"],
+        template: "<button @click='clickHandler'>btn {{pn}}</button>",
+        methods: {
+          clickHandler: function () {
+            console.log("child clickHandler");
+            //
+            this.$emit("custom-event", 3);
+          },
+        },
+      });
+
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          n: 10,
+        },
+
+        methods: {
+          decrement: function (params) {
+            console.log(params);
+            this.n -= params;
+            // this.n--;
+          },
+        },
+      });
+    </script> -->
+
+    <!-- 简写 -->
+    <div id="app">
+      <h3>parent {{n}}</h3>
+      <hr />
+      <xxx-yyy :pn="n" @custom-event="n-=$event.b"></xxx-yyy>
+    </div>
+
+    <script>
+      Vue.component("xxx-yyy", {
+        props: ["pn"],
+        template: `<button @click='$emit("custom-event",{a:"买鞋子",b:3})'>btn {{pn}}</button>`,
+      });
+
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          n: 10,
+        },
+      });
+    </script>
+  </body>
+</html>
