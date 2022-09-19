@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <style>
+      .router-link-exact-active {
+        color: red;
+      }
+    </style>
+    <div id="app">
+      <!-- <h1>hello vue-router</h1> -->
+      <p>
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <hr>
+        <router-link to="/user/123">user/123</router-link>
+        <router-link to="/user/456">user/456</router-link>
+        <hr>
+        <router-link to="/article?id=123">article?id=123</router-link>
+        <router-link to="/article?id=456">article?id=456</router-link>
+
+      </p>
+      <hr />
+      <!-- 路由出口 -->
+      <!-- 路由匹配到的组件将渲染在这里 -->
+      <router-view></router-view>
+    </div>
+
+    <script>
+      //   console.log(Vue, VueRouter);
+      const Home = { template: "<div>home 页面</div>" };
+      const About = {
+        template: "<div>about 页面</div>",
+      };
+      const User = {
+        template: "<div>某个 {{$route.params.id}} 用户的个人主页</div>",
+        // created() {
+        //   //   console.log(this.$router, this.$route);
+        //   console.log("创建");
+        //   console.log(this.$route.params.id);
+        //  122 => 456 都是使用user组件 这个user组件不会销毁重建
+        //  所以created 只会调用一次
+        // },
+        watch: {
+          $route: function (to, from) {
+            console.log(to.params.id);
+          },
+        },
+      };
+
+      const Article = {
+        // template: "<div>article 页面 {{$route.query.id}}</div>",
+        template: "<div>article 页面</div>",
+        created() {
+            console.log('Article组件创建');
+        },
+        updated() {
+            console.log('Article组件更新');
+        },
+      };
+
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+        // 状态
+        data: {},
+
+        router: new VueRouter({
+          //   mode: "history",
+          routes: [
+            { path: "/", component: Home },
+            { path: "/about", component: About },
+            { path: "/user/:id", component: User },
+            { path: "/article", component: Article },
+          ],
+        }),
+      });
+    </script>
+  </body>
+</html>
