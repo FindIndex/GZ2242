@@ -5,6 +5,8 @@
       :key="index"
       :todo="todo"
       @toggle-todo-list-item="$emit('toggle-todo-app-list', $event)"
+      @delete-todo="$emit('delete-todo', $event)"
+      @update-todo="$emit('update-todo', $event)"
     />
     <!-- $event 自定义事件的指向  $emit 携带的参数 -->
   </ul>

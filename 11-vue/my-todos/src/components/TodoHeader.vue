@@ -1,12 +1,19 @@
 <template>
   <header>
-    <input type="checkbox" />
+    <input
+      type="checkbox"
+      :checked="isAllCheck"
+      @change="$emit('toggle-all', $event.target.checked)"
+    />
     <input type="text" v-model="value" @keyup.enter="addTodo" />
   </header>
 </template>
 
 <script>
 export default {
+  props: {
+    isAllCheck: Boolean,
+  },
   data: function () {
     return {
       value: "",
