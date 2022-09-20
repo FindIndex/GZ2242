@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{msg}}</h3>
+      <input ref="xxx" type="text" />
+      <button @click="clickHandler">focus</button>
+
+      <hr />
+      <button @click="focusChild">focus child</button>
+      <child ref="child"></child>
+    </div>
+
+    <script>
+      Vue.component("child", {
+        template:
+          '<input type="text" ref="child-input" placeholder="holder" />',
+      });
+
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+        // 状态
+        data: {
+          msg: "hello world",
+        },
+        methods: {
+          clickHandler: function () {
+            // console.log(document.querySelector("input"));
+            // document.querySelector("input").focus();
+
+            // console.log(this.$refs.xxx);
+            this.$refs.xxx.focus();
+            // 避免使用 document.querySelector
+            // 如果需要调用 DOM元素的属性或者方法
+            // input focus blur  video audio play() pause() duratuion currentTime
+          },
+          focusChild: function () {
+            console.log(this.$refs.child.$refs["child-input"]);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

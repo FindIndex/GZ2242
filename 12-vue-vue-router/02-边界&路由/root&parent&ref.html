@@ -59,12 +59,13 @@
         //     return this.$refs.xxx ? this.$refs.xxx.n : 0;
         //   },
         // },
-
+        // 监听不到
         watch: {
           "this.$refs.xxx.n": function (n) {
             console.log(n);
           },
         },
+        // 应该避免在模板或计算属性中访问 $refs
         mounted() {
           console.log("this.$refs.xxx", this.$refs.xxx);
         },
