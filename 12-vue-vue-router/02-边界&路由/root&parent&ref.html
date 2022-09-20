@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{msg}}</h3>
+      <parent></parent>
+    </div>
+
+    <script>
+      Vue.component("child", {
+        template:
+          "<div class='c' @click='clickHandler'>child {{n}} - {{$root.msg}}</div>",
+        data: function () {
+          return {
+            n: 30,
+          };
+        },
+        created() {
+          console.log(this.$root);
+          // this.$root 就是根组件  调用跟组件的状态 方法
+          console.log(this.$parent);
+        },
+        methods: {
+          clickHandler: function () {
+            this.$root.changeMsg();
+          },
+        },
+      });
+
+      Vue.component("child2", {
+        template: "<div class='c2' >child2 {{n}}</div>",
+        data: function () {
+          return {
+            n: 20,
+          };
+        },
+      });
+      Vue.component("parent", {
+        template:
+          "<div class='p'>parent  <child></child><child2 ref='xxx'></child2></div>",
+        // 计算属性监听不到子组件的状态变化
+        // computed: {
+        //   c2n: function () {
+        //     return this.$refs.xxx ? this.$refs.xxx.n : 0;
+        //   },
+        // },
+
+        // methods: {
+        //   getC2n: function () {
+        //     return this.$refs.xxx ? this.$refs.xxx.n : 0;
+        //   },
+        // },
+
+        watch: {
+          "this.$refs.xxx.n": function (n) {
+            console.log(n);
+          },
+        },
+        mounted() {
+          console.log("this.$refs.xxx", this.$refs.xxx);
+        },
+      });
+
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+        // 状态
+        data: {
+          msg: "hello world",
+        },
+        methods: {
+          changeMsg: function () {
+            this.msg = Math.random();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
