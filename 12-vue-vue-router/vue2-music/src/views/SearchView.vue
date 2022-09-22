@@ -214,19 +214,41 @@
 
     <hr />
 
-    <ul class="hots" v-show="!suggests.length">
-      <h3>hots</h3>
-      <li
-        v-for="(o, i) in hots"
-        :key="i"
-        @click="
-          value = o.first;
-          getSearchResult(o.first);
-        "
-      >
-        {{ o.first }}
-      </li>
-    </ul>
+    <div v-show="!suggests.length">
+      <ul class="hots">
+        <h3>hots</h3>
+        <li
+          v-for="(o, i) in hots"
+          :key="i"
+          @click="
+            value = o.first;
+            getSearchResult(o.first);
+          "
+        >
+          {{ o.first }}
+        </li>
+      </ul>
+      <ul class="history">
+        <h3>history</h3>
+        <li
+          v-for="(item, i) in history"
+          :key="i"
+          @click="
+            value = item;
+            getSearchResult(item);
+          "
+          style="margin: 10px"
+        >
+          {{ item }}
+
+          <span
+            style="margin-left: 50px"
+            @click.stop="history = history.filter((o) => o !== item)"
+            >X</span
+          >
+        </li>
+      </ul>
+    </div>
 
     <ul class="suggests" v-if="suggests.length && !searchRes">
       <h3>suggests</h3>
@@ -264,6 +286,7 @@ export default {
       suggests: [],
       searchRes: null,
       loading: false,
+      history: JSON.parse(window.localStorage.getItem("history")) || [],
     };
   },
 
@@ -299,6 +322,9 @@ export default {
           console.log(res.data.result);
           this.searchRes = res.data.result;
         });
+
+      // 存储本次搜索的关键词
+      this.history = [...new Set([keywords, ...this.history])];
     },
   },
 
@@ -322,6 +348,10 @@ export default {
         // 不存在
         this.suggests = [];
       }
+    },
+
+    history: function (newHistory) {
+      localStorage.setItem("history", JSON.stringify(newHistory));
     },
   },
 };

@@ -1,8 +1,14 @@
 <template>
-  <li class="home-card">
+  <!-- <router-link :to="'/playlist?id=' + item.id"> -->
+  <!-- <router-link :to="{ path: '/playlist', query: { id: item.id } }"> -->
+  <li
+    class="home-card"
+    @click="$router.push({ path: '/playlist', query: { id: item.id } })"
+  >
     <img :src="`${item.picUrl}?imageView=1&type=webp&thumbnail=370x0`" alt="" />
     <h5>{{ item.name }}</h5>
   </li>
+  <!-- </router-link> -->
 </template>
 
 <script>

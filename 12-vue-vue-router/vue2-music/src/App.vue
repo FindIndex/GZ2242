@@ -1,13 +1,33 @@
 <template>
   <div id="app">
-    <nav>
+    <nav v-if="$route.meta.showNav">
       <router-link to="/">推荐音乐</router-link>
       <router-link to="/hot">热歌榜</router-link>
       <router-link to="/search">搜索</router-link>
     </nav>
-    <router-view />
+    <router-view @updata-song="song = $event" />
+
+    <audio
+      v-if="song"
+      :src="` https://music.163.com/song/media/outer/url?id=${song?.id}.mp3`"
+      controls
+      autoplay
+    ></audio>
   </div>
 </template>
+
+<script>
+export default {
+  // created: function () {
+  //   console.log("App this.$route", this.$route);
+  // },
+  data: function () {
+    return {
+      song: null,
+    };
+  },
+};
+</script>
 
 <style lang="less" scoped>
 #app {
@@ -30,7 +50,6 @@ nav {
     height: 40rem;
     line-height: 40rem;
     padding: 0 5rem;
-    
 
     &.router-link-exact-active {
       color: #dd001b;

@@ -9,7 +9,19 @@
     <hr />
     <h3>最新音乐</h3>
     <ul>
-      <SongItem v-for="song in newsongs" :key="song.id" :song="song" />
+      <!-- <SongItem
+        v-for="song in newsongs"
+        :key="song.id"
+        :song="song"
+        @click.native="clickHandler"
+      /> -->
+      <SongItem
+        class="test"
+        v-for="song in newsongs"
+        :key="song.id"
+        :song="song"
+        @updata-song="$emit('updata-song', $event)"
+      />
     </ul>
   </div>
 </template>
@@ -32,6 +44,11 @@ export default {
       personalizeds: [],
       newsongs: [],
     };
+  },
+  methods: {
+    clickHandler: function () {
+      console.log(123);
+    },
   },
 
   created() {
