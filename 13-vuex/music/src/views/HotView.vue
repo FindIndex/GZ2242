@@ -8,7 +8,12 @@
       </div>
     </div>
     <ul>
-      <HotSong v-for="(hotsong,index) in hotsongs" :key="hotsong.id" :hotsong="hotsong" :index="index"></HotSong>
+      <HotSong
+        v-for="(hotsong, index) in hotsongs"
+        :key="hotsong.id"
+        :hotsong="hotsong"
+        :index="index"
+      ></HotSong>
     </ul>
   </div>
 </template>
@@ -37,8 +42,12 @@ export default {
     this.axios
       .get("https://apis.netstart.cn/music/playlist/detail?id=3778678")
       .then((res) => {
-        this.hotsongs = res.data.playlist.tracks.slice(0,20)
+        this.hotsongs = res.data.playlist.tracks.slice(0, 20);
       });
+
+    this.axios.get("/test.json?xx=789").then((res) => {
+      console.log(res);
+    });
   },
 };
 </script>

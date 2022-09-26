@@ -117,6 +117,7 @@
       @update-song-list="songlist = $event"
       :songId="song?.id"
       :playing="playing"
+      :style="{ marginBottom: song ? '60rem' : '0' }"
     />
 
     <audio
@@ -132,6 +133,7 @@
 
     <!-- v-if="song" -->
     <PlayBar
+      v-if="song"
       :song="song"
       :playing="playing"
       @song-play="$refs.audio.play()"
@@ -144,6 +146,7 @@
 
     <!-- v-if="song && showPlayPage" -->
     <PlayPage
+      v-if="song && showPlayPage"
       :song="song"
       :playing="playing"
       @song-play="$refs.audio.play()"
@@ -179,16 +182,20 @@ export default {
   data() {
     return {
       cardId: null,
-      song: null,
+      song: JSON.parse(localStorage.getItem("song")),
       playing: false,
       duration: 0,
-      currentTime: 0,
+      currentTime: Number(localStorage.getItem("currentTime")) || 0,
       showPlayPage: false,
-      songlist: [],
+      songlist: JSON.parse(localStorage.getItem("songlist")) || [],
       showPlayList: false,
       models: ["顺", "随", "单"],
       model: "顺",
     };
+  },
+
+  mounted() {
+    this.$refs.audio.currentTime = this.currentTime;
   },
   methods: {
     giveId: function (n) {
@@ -239,6 +246,20 @@ export default {
       return this.song
         ? `https://music.163.com/song/media/outer/url?id=${this.song.id}.mp3`
         : null;
+    },
+  },
+
+  watch: {
+    song: function (song) {
+      // console.log(song);
+      localStorage.setItem("song", JSON.stringify(song));
+    },
+    songlist: function (songlist) {
+      // console.log(song);
+      localStorage.setItem("songlist", JSON.stringify(songlist));
+    },
+    currentTime: function (currentTime) {
+      localStorage.setItem("currentTime", JSON.stringify(currentTime));
     },
   },
 };
