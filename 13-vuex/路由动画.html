@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <style>
+      .router-link-exact-active {
+        color: red;
+      }
+
+      /* .xxx-leave-active, */
+      .xxx-enter-active {
+        transition: all 0.3s;
+      }
+
+      .xxx-enter {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      .xxx-enter-to {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+
+      .xxx-leave {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .xxx-leave-to {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+
+      .test {
+        position: relative;
+      }
+    </style>
+    <div id="app">
+      <!-- <h1>hello vue-router</h1> -->
+      <p>
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/users">Users</router-link>
+      </p>
+      <hr />
+      <!-- 路由出口 -->
+      <!-- 路由匹配到的组件将渲染在这里 -->
+      <div class="test">
+        <transition name="xxx">
+          <router-view
+            style="position: absolute; top: 0; left: 0"
+          ></router-view>
+        </transition>
+      </div>
+    </div>
+
+    <script>
+      //   console.log(Vue, VueRouter);
+      const Home = { template: "<div>home 页面</div>" };
+      const About = {
+        template: "<div>about 页面</div>",
+        created() {
+          console.log(this.$router, this.$route);
+        },
+      };
+      const Users = { template: "<div>所有用户列表 页面</div>" };
+
+      var app = new Vue({
+        // 根元素
+        el: "#app",
+        // 状态
+        data: {},
+
+        router: new VueRouter({
+          //   mode: "history",
+          routes: [
+            { path: "/", component: Home },
+            { path: "/about", component: About },
+            { path: "/users", component: Users },
+          ],
+        }),
+      });
+    </script>
+  </body>
+</html>

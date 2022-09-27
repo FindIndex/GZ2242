@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      /* .box {
+        transition: all 3s;
+        transform: translateX(0);
+      }
+      .active {
+        transform: translateX(100px);
+      } */
+
+      /* .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 10s;
+      }
+      .fade-enter, .fade-leave-to  {
+        opacity: 0;
+      } */
+
+      /* .xxx-enter-active,
+      .xxx-leave-active {
+        transition: all 3s;
+      }
+
+      .xxx-enter {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      .xxx-enter-to {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+
+      .xxx-leave {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .xxx-leave-to {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      .yyy-enter-active {
+        animation: yyy 3s;
+      }
+      .yyy-leave-active {
+        animation: yyy 3s reverse;
+      }
+      @keyframes yyy {
+        from {
+          transform: translateX(100px);
+        }
+        to {
+          transform: translateX(0px);
+        }
+      } */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="show = !show">toggle</button>
+      <!-- <div class="box active" v-if="show">show</div> -->
+      <!-- <div class="box" :class="{active: show}">show</div> -->
+      <!-- <div class="box" :class="{active: show}" v-if="show">show</div> -->
+      <!-- <div class="box" :class="{active: show}" v-show="show">show</div> -->
+      <!-- 演示 -->
+      <!-- <transition name="fade">
+        <div class="box" v-if="show">show</div>
+      </transition> -->
+
+      <!-- 过渡 -->
+      <!-- <transition name="xxx">
+        <div class="box" v-if="show">show</div>
+      </transition> -->
+
+      <!-- 动画 -->
+      <!-- <transition name="yyy">
+        <div class="box" v-if="show">show</div>
+      </transition> -->
+
+      <!-- 配合动画库 -->
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animate__animated animate__zoomInUp"
+      >
+        <div class="box" v-if="show">show</div>
+      </transition>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          show: false,
+        },
+      });
+    </script>
+  </body>
+</html>
