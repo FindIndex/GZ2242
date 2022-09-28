@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+
     <h3>编辑推荐</h3>
     <ul class="card-list">
       <HomeCard
@@ -33,7 +34,7 @@ export default {
   },
   props: {
     songId: [String, Number],
-    playing:Boolean
+    playing: Boolean,
   },
   data() {
     return {
@@ -44,12 +45,12 @@ export default {
 
   created: function () {
     Promise.all([
-      this.axios.get("https://apis.netstart.cn/music/personalized", {
+      this.axios.get("personalized", {
         params: {
           limit: 6,
         },
       }),
-      this.axios.get("https://apis.netstart.cn/music/personalized/newsong"),
+      this.axios.get("personalized/newsong"),
     ]).then(([p, n]) => {
       // console.log(p,n);
       this.personalizeds = p.data.result;

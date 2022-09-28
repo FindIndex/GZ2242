@@ -13,11 +13,19 @@
       <canvas ref="canvas" width="50" height="50"></canvas>
     </div>
     <button @click="$emit('toggle-showPlayList')">列</button>
+    <!-- <input key="aaa" type="range" :value="50"> -->
+    <input key="aaa" type="text" :value="50">
   </div>
 </template>
 
 <script>
 export default {
+
+  methods: {
+    handler: function () {
+      console.log('xxxxxxxxxxxxxx');
+    }
+  },
   props: {
     song: Object,
     playing: Boolean,
@@ -33,7 +41,7 @@ export default {
 
   watch: {
     persontage: function (n) {
-      console.log(n);
+      // console.log(n);
 
       var canvas = this.$refs.canvas;
       var context = canvas.getContext("2d");

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{$store.state.count}}</h1>
+      <button @click="increment">count++</button>
+      <button @click="decrement">count--</button>
+      <h1>{{$store.state.msg}}</h1>
+      <hr />
+
+      <h1>{{count}}</h1>
+      <h1>{{msg}}</h1>
+    </div>
+    <script>
+      //   console.log(Vuex);
+
+      const { Store, mapState, mapMutations } = Vuex;
+
+      const store = new Store({
+        state: {
+          count: 0,
+          msg: "hello world",
+        },
+        mutations: {
+          // state 代表当前所处的store里面的state
+          increment(state) {
+            state.count++;
+          },
+          decrement(state) {
+            state.count--;
+          },
+        },
+      });
+
+      //   读
+      //   console.log(store.state.count);
+
+      //   改
+      //   store.state.count=20❌
+      //   store.commit("increment");
+
+      new Vue({
+        el: "#app",
+        data: function () {
+          return {
+            n: 10,
+          };
+        },
+        store,
+        // 与router一样  在跟组件注入 store 这样 所有的子组件都可以通过 this.$store访问到
+
+        // 手写计算属性
+        // computed: {
+        //   count: function () {
+        //     return this.$store.state.count;
+        //   },
+        //   msg: function () {
+        //     return this.$store.state.msg;
+        //   },
+        // },
+
+        // 使用 mapState 简化
+        // computed: mapState({
+        //   count: (state) => state.count,
+        //   msg: (state) => state.msg,
+        // }),
+
+        // 不改变名字的情况下 更简化
+        // computed: mapState(["count", "msg"]),
+
+        // computed: {
+        //   n2: function () {
+        //     return this.n * 2;
+        //   },
+        // },
+
+        computed: {
+          ...mapState(["count", "msg"]),
+          ...mapState({
+            message: (state) => state.msg,
+          }),
+          n2: function () {
+            return this.n * 2;
+          },
+        },
+
+        // methods: {
+        //   increment: function () {
+        //     this.$store.commit("increment");
+        //   },
+        //   decrement: function () {
+        //     this.$store.commit("decrement");
+        //   },
+        // },
+
+        methods: {
+          ...mapMutations(["increment", "decrement"]),
+          //   // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+          xxx: function () {
+            console.log("xxx");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

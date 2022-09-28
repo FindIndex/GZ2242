@@ -8,12 +8,16 @@
       <div class="noblur">
         <span class="listType">歌单</span>
         <span class="count">{{ count }}</span>
-        <img class="listImg" :src="playlist?.coverImgUrl" alt="" />
+        <img class="listImg" :src="playlist?.coverImgUrl | imageView" alt="" />
       </div>
       <div class="listRight">
         <div class="listTitle">{{ playlist?.name }}</div>
         <div class="creator">
-          <img :src="playlist?.creator?.avatarUrl" alt="" class="creatorImg" />
+          <img
+            :src="playlist?.creator?.avatarUrl | imageView(50)"
+            alt=""
+            class="creatorImg"
+          />
           <span class="creatorName">
             {{ playlist?.creator?.nickname }}
           </span>
@@ -64,7 +68,7 @@ export default {
   methods: {
     getPlayList: function (id) {
       this.axios
-        .get("https://apis.netstart.cn/music/playlist/detail", {
+        .get("playlist/detail", {
           params: { id },
         })
         .then((res) => {
@@ -77,6 +81,8 @@ export default {
   created: function () {
     this.getPlayList(this.$route.query.id);
     // console.log(this.$route.query.id);
+
+    console.log("this.xxx()", this.xxx());
   },
   // beforeRouteUpdate(to, from, next) {
   //   // 在当前路由改变，但是该组件被复用时调用

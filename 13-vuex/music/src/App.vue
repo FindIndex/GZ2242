@@ -1,5 +1,6 @@
 <template>
   <div id="app" @home-card-id-app="giveId">
+        
     <nav v-if="$route.meta.showNav">
       <div class="navTop">
         <!-- <img src="./assets/musicLogo.png" alt="" /> -->
@@ -191,6 +192,8 @@ export default {
       showPlayList: false,
       models: ["顺", "随", "单"],
       model: "顺",
+
+
     };
   },
 
