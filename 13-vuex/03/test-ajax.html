@@ -6,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <meta name="referrer" content="never">
+    <meta name="referrer" content="never" />
   </head>
   <body>
     <script>
-      axios.post(
-        "https://manga.bilibili.com/twirp/comic.v1.Comic/HomeRecommend?device=h5&platform=web",
-        {
-          seed: 1,
-          drag: 1,
-          page_num: 1,
-          platform: "h5",
-        }
-      );
+      // axios.post(
+      //   "https://manga.bilibili.com/twirp/comic.v1.Comic/HomeRecommend?device=h5&platform=web",
+      //   {
+      //     seed: 1,
+      //     drag: 1,
+      //     page_num: 1,
+      //     platform: "h5",
+      //   }
+      // );
+
+      axios.post("https://kohcamp.qq.com/moment/detail", {
+        momentId: 10000706479,
+      });
     </script>
   </body>
 </html>

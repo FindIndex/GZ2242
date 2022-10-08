@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta name="referrer" content="never" />
+  </head>
+  <body>
+    <script>
+      // axios.post("https://kohcamp.qq.com/moment/detail", {
+      //   momentId: 10000706479,
+      // });
+
+      // url  + ?name=nick&age=17
+      // axios.get("https://localhost", {
+      //   params: {
+      //     name: "nick",
+      //     age: 17,
+      //   },
+      // });
+
+
+      // application/json
+      // axios post方式默认是以 json的格式向服务器发送内容
+      // {"name":"nick","age":17}
+      // JSON content-type: application/json;charset=UTF-8
+      // axios.post("https://localhost", {
+      //   name: "nick",
+      //   age: 17,
+      // });
+
+      // application/x-www-form-urlencoded
+      // 与get方式相同的编码格式  name=nick&age=17
+      // Form content-type: application/x-www-form-urlencoded
+      // jQuery默认的post方式
+
+      let obj = {
+        name: "nick",
+        age: 17,
+      };
+      let params = new URLSearchParams();
+      for (key in obj) {
+        params.append(key, obj[key]);
+      }
+      axios.post("https://localhost", params);
+    </script>
+  </body>
+</html>
