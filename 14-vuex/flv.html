@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="http://bilibili.github.io/flv.js/dist/flv.js"></script>
+  </head>
+  <body>
+    <!-- <video
+      src="https://tliveplay.mogujielive.com/live/50109588_12350183_SHD3.flv"
+      controls
+    ></video> -->
+    <video width="300" id="videoElement"></video>
+
+    <script>
+      //   console.log(flvjs);
+
+      var videoElement = document.getElementById("videoElement");
+      var flvPlayer = flvjs.createPlayer({
+        type: "flv",
+        url: "http://tliveplay.yuanbobo.com/live/469070847586404800.flv",
+      });
+      flvPlayer.attachMediaElement(videoElement);
+      flvPlayer.load();
+      flvPlayer.play();
+    </script>
+
+    <!-- <video src="https://qiubai-video.yitxf.net/Z1XGSVBVELJYXNIK_hd.mp4" controls></video> -->
+  </body>
+</html>
