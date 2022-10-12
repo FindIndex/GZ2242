@@ -15,6 +15,7 @@ import MeView from "../views/MeView.vue";
 import SearchView from "../views/SearchView.vue";
 import RecipeDetail from "../views/RecipeDetail.vue";
 import NoteDetail from "../views/NoteDetail.vue";
+import LoginView from "../views/LoginView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,11 +86,17 @@ const router = createRouter({
           path: "/fav",
           name: "fav",
           component: FavView,
+          meta: {
+            needLogin: true,
+          },
         },
         {
           path: "/me",
           name: "me",
           component: MeView,
+          meta: {
+            needLogin: true,
+          },
         },
       ],
     },
@@ -109,7 +116,25 @@ const router = createRouter({
       name: "note",
       component: NoteDetail,
     },
+
+    {
+      path: "/login",
+      name: "login",
+      component: LoginView,
+    },
   ],
+});
+
+router.beforeEach((to, from) => {
+  // ...
+  // 返回 false 以取消导航
+  // return false
+  // console.log("路由跳转", to, from);
+  let token = localStorage.getItem("token");
+  if (to.meta.needLogin && !token) {
+    console.log("需要登陆");
+    router.push("/login?from=" + to.fullPath);
+  }
 });
 
 export default router;
