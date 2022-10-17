@@ -1,0 +1,6 @@
+/* pages/test/test.wxss */
+.xxx {
+  color: red;
+  background-color: lightblue;
+  width: 450rpx;
+}

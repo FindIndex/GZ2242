@@ -1,0 +1,12 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml-hahaha</text>
+
+<view>块级元素</view>
+<view>块级元素</view>
+<text>行内元素</text>
+<text>行内元素</text>
+
+<button type="warn" size="mini">页面主操作 Normal</button>
+<image style="width: 200rpx; height: 50rpx; background-color: red;" mode="aspectFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+
+<view class="xxx" bindtap="clickHandler">{{msg}}</view>
