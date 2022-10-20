@@ -10,3 +10,12 @@
 <image style="width: 200rpx; height: 50rpx; background-color: red;" mode="aspectFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
 
 <view class="xxx" bindtap="clickHandler">{{msg}}</view>
+
+<map longitude="{{pos.longitude}}" latitude="{{pos.latitude}}"></map>
+
+<view class="list">
+  <!-- <view>{{list[0].q}}</view> -->
+  <!-- <view wx:for="{{list}}">{{item.q}}-{{index}}</view> -->
+  <view wx:for="{{list}}" wx:for-item="xxx" wx:for-index="idx" wx:key="idx" data-xx="{{xxx.q}}" bindtap="eventParams">{{idx}}-{{xxx.q}}</view>
+
+</view>

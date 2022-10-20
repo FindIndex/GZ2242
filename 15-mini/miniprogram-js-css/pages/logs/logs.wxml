@@ -1,4 +1,8 @@
 <!--logs.wxml-->
+<!-- <button type="primary" bindtap="navto">btn</button> -->
+<navigator url="/pages/test2/test2?id=123" open-type="navigate">test2</navigator>
+<navigator url="/pages/test/test" open-type="switchTab">test</navigator>
+
 <view class="container log-list">
   <block wx:for="{{logs}}" wx:key="timeStamp" wx:for-item="log">
     <text class="log-item">{{index + 1}}. {{log.date}}</text>

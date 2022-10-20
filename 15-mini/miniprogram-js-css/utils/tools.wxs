@@ -1,0 +1,4 @@
+var parse = function (n) {
+  return n * 2
+}
+module.exports.parse = parse;

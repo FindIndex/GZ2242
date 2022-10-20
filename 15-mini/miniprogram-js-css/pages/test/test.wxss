@@ -4,3 +4,4 @@
   background-color: lightblue;
   width: 450rpx;
 }
+@import 'test-wxa-auto-dark.wxss'

@@ -1,0 +1,56 @@
+<!--pages/wxmlwxsswxs/wxmlwxsswxs.wxml-->
+<text>pages/wxmlwxsswxs/wxmlwxsswxs.wxml</text>
+<view wx:for="{{[11,22,33]}}" wx:key="index">{{item}}</view>
+
+<view wx:if="{{27 > 18}}">成年</view>
+<view wx:else>未成年</view>
+
+
+<block wx:for="{{[11, 22, 33]}}">
+  <view> {{index}}: </view>
+  <view> {{item}} </view>
+</block>
+
+
+<view wx:for="{{5}}" wx:key="index" hidden>{{item}}</view>
+
+
+<template name="msgItem">
+  <view>
+    <text> {{index}}: {{msg}} </text>
+    <text> Time: {{time}} </text>
+  </view>
+</template>
+
+<template is="msgItem" data="{{index:0, msg: 'hahaha', time: 12}}" />
+<template is="msgItem" data="{{index:1, msg: 'hehehe', time: 15}}" />
+
+
+<template name="listitem">
+  <view class="listitem">
+    <text> {{index}}: {{item}} </text>
+  </view>
+</template>
+
+
+<template is="listitem" wx:for="{{[11,22,33]}}" data="{{item, index}}" />
+
+
+<!-- <wxs module="m1">
+  var msg = "hello world";
+  var parse = function (n) {
+    return n * 2
+  }
+  module.exports.message = msg;
+  module.exports.parse = parse;
+</wxs> -->
+
+
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+
+<view wx:for="{{nums}}">
+  <!-- <view>{{item.a}}-{{parse(item.b.count)}}</view> -->
+  <!-- <view>{{item.a}}-{{m1.message}}</view> -->
+  <!-- <view>{{item.a}}-{{m1.parse(item.b.count)}}</view> -->
+  <view>{{item.a}}-{{tools.parse(item.b.count)}}</view>
+</view>

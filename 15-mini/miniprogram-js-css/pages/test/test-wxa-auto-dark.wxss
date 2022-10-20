@@ -1,0 +1,15 @@
+/* 
+此文件为开发者工具生成，生成时间: 2022/10/18上午11:38:04
+使用方法：
+在 test.wxss 文件末尾引入样式
+```
+@import "./test-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .xxx {
+        color: rgb(243, 0, 0);
+        background-color: rgb(11, 57, 68);
+    }
+}

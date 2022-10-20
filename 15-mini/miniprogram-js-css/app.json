@@ -2,7 +2,9 @@
   "pages": [
     "pages/test/test",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/test2/test2",
+    "pages/wxmlwxsswxs/wxmlwxsswxs"
   ],
   "window": {
     "backgroundColor": "#00f",
@@ -15,9 +17,9 @@
 
 
   "tabBar": {
-    "color":"#00f",
+    "color": "#00f",
     "selectedColor": "#f00",
-    "position":"bottom",
+    "position": "bottom",
     "list": [{
       "pagePath": "pages/test/test",
       "text": "测试",
@@ -28,10 +30,12 @@
       "text": "首页",
       "iconPath": "/assets/icon-category.png",
       "selectedIconPath": "/assets/icon-category-selected.png"
-    },{
-      "pagePath": "pages/logs/logs",
-      "text": "logs"
     }]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要定位，以便匹配附近好友"
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
