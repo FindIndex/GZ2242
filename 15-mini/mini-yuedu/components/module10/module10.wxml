@@ -1,0 +1,8 @@
+<!--components/module10/module10.wxml-->
+<!-- <text>components/module10/module10.wxml</text> -->
+
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}" bindchange="swiperChange">
+  <swiper-item wx:for="{{item.banners}}" wx:key="index" wx:for-item="banner">
+    <image style="width: 750rpx;" mode="widthFix" src="{{banner.cover}}"></image>
+  </swiper-item>
+</swiper>

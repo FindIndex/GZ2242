@@ -6,10 +6,18 @@
         <RouterLink to="/videos">视频</RouterLink>
         <RouterLink to="/activitys">活动</RouterLink>
     </nav>
-    <RouterView />
-
-
+    <!-- <RouterView /> -->
+    <router-view v-slot="{ Component }">
+        <transition name="fade">
+            <keep-alive>
+                <component :is="Component" />
+            </keep-alive>
+        </transition>
+    </router-view>
 </template>
+
+
+
 
 <script>
 export default {
@@ -18,9 +26,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
 nav {
     a {
         padding: 0 10px;
+
         &.router-link-exact-active {
             color: red;
         }

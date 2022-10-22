@@ -1,0 +1,14 @@
+<!--pages/index/index.wxml-->
+<text>pages/index/index.wxml</text>
+<input model:value="{{name}}" type="text" placeholder="name" />
+<input model:value="{{age}}" type="number" placeholder="age" />
+<radio-group bindchange="radioChange">
+  <label class="radio">
+    <radio value="1" checked="true" name="gender" />男
+  </label>
+  <label class="radio">
+    <radio value="0" name="gender" />女
+  </label>
+</radio-group>
+
+<button type="primary" bindtap="adduser">addUser</button>

@@ -1,0 +1,22 @@
+<!--pages/store/store.wxml-->
+<!-- <text>pages/store/store.wxml</text>
+<van-button type="primary">按钮</van-button> -->
+
+<van-nav-bar>
+  <view slot="left" bindtap="toggleGender">
+    <text wx:if="{{gender===1}}">男</text>
+    <text wx:else>女</text>
+  </view>
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" slot="right" />
+</van-nav-bar>
+
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab wx:for="{{navi}}" title="{{item.name}}" wx:key="index" data-url="{{item.url}}"></van-tab>
+</van-tabs>
+
+<block wx:for="{{modules}}" wx:key="index" >
+  <view>{{item.module}}-{{item.name}}</view>
+  <module10 wx:if="{{item.module === 10}}" item="{{item}}" bind:xxxyyy="xxx"></module10>
+
+</block>
+

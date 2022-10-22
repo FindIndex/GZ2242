@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let config = {
-  // baseURL: "https://apis.netstart.cn/douguo/",
+  baseURL: "https://apis.netstart.cn/douguo/",
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control

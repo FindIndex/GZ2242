@@ -29,9 +29,25 @@ watch(noteFav, (newNoteFav) => {
   </header>
 
   <RouterView />
+  <!-- <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view> -->
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
 header {
   line-height: 1.5;
   max-height: 100vh;
