@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory ,createWebHashHistory} from "vue-router";
 import BottomNav from "../views/BottomNav.vue";
 import HomeNav from "../views/HomeNav.vue";
 import HomeRecommend from "../views/HomeRecommend.vue";
@@ -18,7 +18,9 @@ import NoteDetail from "../views/NoteDetail.vue";
 import LoginView from "../views/LoginView.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+
   routes: [
     // {
     //   path: '/',
