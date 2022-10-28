@@ -1,0 +1,9 @@
+<!--pages/login/login.wxml-->
+<!-- <text>pages/login/login.wxml</text> -->
+<button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+  <image class="avatar" src="{{avatarUrl}}"></image>
+</button>
+<input model:value="{{nickname}}" type="nickname" class="weui-input" placeholder="请输入昵称" />
+
+
+<button wx:if="{{avatarUrl.includes('http://tmp/') ||nickname }}" bindtap="zhuce" type="primary">注册</button>

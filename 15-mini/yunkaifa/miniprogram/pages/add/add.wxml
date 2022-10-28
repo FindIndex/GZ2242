@@ -1,0 +1,13 @@
+<!--pages/add/add.wxml-->
+<!-- <text>pages/add/add.wxml</text> -->
+
+
+<textarea model:value="{{text}}" name="" id="" cols="30" rows="10" placeholder="请输入这一刻的想法"></textarea>
+
+
+<view style="display: flex; flex-wrap: wrap;">
+  <image wx:for="{{tempFiles}}" wx:key="index" src="{{item.tempFilePath}}" style="width: 250rpx; height: 250rpx;"></image>
+  <icon class="icon-box-img" type="warn" size="250rpx" color="#C9C9C9" bindtap="addImage"></icon>
+</view>
+
+<button bindtap="addArticle" type="primary" wx:if="{{tempFiles.length || text }}">发布</button>

@@ -1,0 +1,19 @@
+<!--pages/home/home.wxml-->
+<!-- <text>pages/home/home.wxml</text> -->
+
+
+<view wx:for="{{items}}">
+  <view class="user" style="display: flex; align-items: center;">
+    <image src="{{item.userInfo.avatarFileID}}" style="width: 60rpx; height: 60rpx; border-radius: 50%;"></image>
+    <text style="margin-left: 20rpx;">{{item.userInfo.nickname}}</text>
+  </view>
+  <view style="margin-left: 80rpx;">
+
+    <view wx:if="{{item.text}}">{{item.text}}</view>
+    <view wx:if="{{item.imges.length}}" class="images" style="display: flex;">
+      <image wx:for="{{item.imges}}" wx:for-item="image" wx:key="index" src="{{image.fileID}}" style="width: 220rpx; height: 220rpx; "></image>
+    </view>
+
+
+  </view>
+</view>

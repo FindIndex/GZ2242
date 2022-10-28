@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/add/add",
+    "pages/login/login",
     "pages/index/index",
     "pages/test/test"
   ],
@@ -9,6 +12,15 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/home/home",
+      "text": "home"
+    }, {
+      "pagePath": "pages/add/add",
+      "text": "add"
+    }]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

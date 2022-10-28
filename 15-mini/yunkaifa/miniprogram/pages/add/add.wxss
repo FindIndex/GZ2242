@@ -1,0 +1,7 @@
+/* pages/add/add.wxss */
+
+textarea {
+  width: 750rpx;
+  box-sizing: border-box;
+  border: 2rpx solid red;
+}
