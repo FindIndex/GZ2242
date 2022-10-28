@@ -14,7 +14,9 @@ Page({
   data: {
     name: '',
     age: '',
-    gender: 1
+    gender: 1,
+    tempFiles: [],
+    uploadFiles: []
   },
 
   radioChange(event) {
@@ -37,6 +39,42 @@ Page({
     })
   },
 
+  chooseImage() {
+    wx.chooseMedia({
+      success: (res) => {
+        // console.log('选择图片成功', res.tempFiles);
+        this.setData({
+          tempFiles: res.tempFiles
+        })
+      }
+    })
+  },
+  // {tempFilePath: "http://tmp/2kgyj3Pt3UKxa927500678482e4303b865922340a3f0.jpg", size: 24750, fileType: "image"}
+
+  uploadFile() {
+    // wx.cloud.uploadFile({
+    //   // cloudPath: 'my-photo.png',
+    //   cloudPath: this.data.tempFiles[0].tempFilePath.replace('http://tmp/', ''),
+    //   // 指定要上传的文件的小程序临时文件路径
+    //   filePath: this.data.tempFiles[0].tempFilePath,
+    //   // 成功回调
+    //   success: res => {
+    //     console.log('上传成功', res)
+    //   },
+    // })
+
+    Promise.all(this.data.tempFiles.map(o => {
+      return wx.cloud.uploadFile({
+        cloudPath: o.tempFilePath.replace('http://tmp/', ''),
+        filePath: o.tempFilePath,
+      })
+    })).then(res => {
+      console.log('上传多张完成', res);
+      this.setData({
+        uploadFiles: res
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

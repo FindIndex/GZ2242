@@ -12,3 +12,16 @@
 </radio-group>
 
 <button type="primary" bindtap="adduser">addUser</button>
+
+
+<button bindtap="chooseImage">选择图片</button>
+
+<view style="display: flex; flex-wrap: wrap;">
+  <image style="width: 250rpx; height: 250rpx; padding: 20rpx; box-sizing: border-box;" mode="aspectFill" wx:for="{{tempFiles}}" wx:key="index" src="{{item.tempFilePath}}"></image>
+</view>
+
+<button bindtap="uploadFile">上传图片</button>
+<view style="display: flex; flex-wrap: wrap;">
+  <image style="width: 250rpx; height: 250rpx; padding: 20rpx; box-sizing: border-box;" mode="aspectFill" wx:for="{{uploadFiles}}" wx:key="index" src="{{item.fileID}}"></image>
+</view>
+<!-- <image src="cloud://development-6gom020dcbcdbb28.6465-development-6gom020dcbcdbb28-1304103009/my-photo.png"></image> -->
