@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/add/add",
+    "pages/yunfun/yunfun",
     "pages/login/login",
     "pages/index/index",
     "pages/test/test"

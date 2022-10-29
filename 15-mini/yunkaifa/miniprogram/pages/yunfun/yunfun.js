@@ -1,27 +1,29 @@
-const db = wx.cloud.database()
-const xinqings = db.collection('xinqings')
-
-// pages/home/home.js
+// pages/yunfun/yunfun.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items: []
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // xinqings.where({}).get({
-    //   success: (res) => {
-    //     // console.log(res);
-    //     this.setData({
-    //       items: res.data
-    //     })
+
+    console.log('开始调用', new Date());
+    // wx.cloud.callFunction({
+    //   name: "add",
+    //   data: {
+    //     a: 1,
+    //     b: 2
+    //   },
+    //   success(res) {
+    //     console.log(res, new Date());
     //   }
+    //   // event.userInfo: {appId: "wxb4459439ae4d546f", openId: "o7W245Q9KJzG2jJjvZBrazAHVZnM"}
     // })
 
     wx.cloud.callFunction({
@@ -30,13 +32,11 @@ Page({
         limit: 3,
         skip: 3
       },
-      success:(res)=> {
-        // console.log('查找所有xinqings', res);
-        this.setData({
-          items: res.result.list
-        })
+      success(res) {
+        console.log('查找所有xinqings', res);
       }
     })
+
   },
 
   /**

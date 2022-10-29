@@ -4,8 +4,8 @@
 
 <view wx:for="{{items}}">
   <view class="user" style="display: flex; align-items: center;">
-    <image src="{{item.userInfo.avatarFileID}}" style="width: 60rpx; height: 60rpx; border-radius: 50%;"></image>
-    <text style="margin-left: 20rpx;">{{item.userInfo.nickname}}</text>
+    <image src="{{item.author[0].avatarFileID}}" style="width: 60rpx; height: 60rpx; border-radius: 50%;"></image>
+    <text style="margin-left: 20rpx;">{{item.author[0].nickname}}</text>
   </view>
   <view style="margin-left: 80rpx;">
 

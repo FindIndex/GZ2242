@@ -33,12 +33,24 @@ Page({
 
         // 再存昵称+头像图片文件id
 
-        users.add({
+        // users.add({
+        //   data: {
+        //     avatarFileID: res.fileID,
+        //     nickname: this.data.nickname
+        //   }
+        // })
+        // 使用云函数注册或者更新
+        wx.cloud.callFunction({
+          name: "add_or_updata_users",
           data: {
             avatarFileID: res.fileID,
             nickname: this.data.nickname
+          },
+          success(res) {
+            console.log('设置成功', res);
           }
         })
+
       },
     })
 
