@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 // const uri =
 //   "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority";
 const uri = "mongodb://127.0.0.1:27017?retryWrites=true&w=majority";
@@ -15,4 +15,4 @@ const users = db.collection("users");
 // })();
 
 // exports.users = users
-module.exports = { client, users };
+module.exports = { client, ObjectId, users };

@@ -8,11 +8,27 @@ const router = new Router();
 
 const bodyParser = require("koa-bodyparser");
 
-const { users } = require("./mongo.js");
+const { ObjectId, users } = require("./mongo.js");
 
 const CryptoJS = require("crypto-js");
 
 const jwt = require("jsonwebtoken");
+
+const multer = require("koa-multer");
+const path = require("path");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    // console.log(file);
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+const upload = multer({ storage: storage });
 
 app.use(bodyParser());
 
@@ -93,18 +109,51 @@ router.post("/login", async (ctx, next) => {
   ctx.body = responseMsg;
 });
 
-// 个人面板 必须登录
-router.get("/profile", (ctx, next) => {
+const getToken = async (ctx, next) => {
   let token = ctx.request.header.authorization?.replace("Bearer ", "");
   try {
     var decoded = jwt.verify(token, "shhhhh");
-    console.log(decoded);
-    // 根据用户id 查询用户详情 并发送给前端
-
-    ctx.body = decoded;
+    ctx.state.user = decoded;
+    await next();
   } catch (error) {
     ctx.body = { state: 401, msg: "error", text: "需要token或者token失效" };
   }
+};
+
+// 个人面板 必须登录
+router.get("/profile", getToken, (ctx, next) => {
+  let token = ctx.state.user;
+  ctx.body = token;
+});
+
+// 个人面板 更新 必须登录
+// router.put("/profile", getToken, async (ctx, next) => {
+//   let user = ctx.state.user;
+//   // console.log(user, ctx.request.body);
+//   let { gender, qianming } = ctx.request.body;
+//   let res = await users.updateOne(
+//     { _id: ObjectId(user._id) },
+//     { $set: { gender, qianming } }
+//   );
+//   // console.log(await users.findOne({ username: user.username }));
+//   // console.log(await users.findOne({ _id: ObjectId(user._id) }));
+
+//   ctx.body = { state: 200, msg: "success", text: "更新成功", res };
+// });
+
+// 携带文件头像
+router.put("/profile", getToken, upload.single("avatar"), async (ctx, next) => {
+  let user = ctx.state.user;
+  console.log(user, ctx.req.body, ctx.req.file);
+  // 默认没有开启二进制文件上传 multipart/form-data
+
+  let { gender, qianming } = ctx.req.body;
+  let res = await users.updateOne(
+    { _id: ObjectId(user._id) },
+    { $set: { gender, qianming, avatar: ctx.req.file.filename } }
+  );
+
+  ctx.body = { state: 200, msg: "success", text: "更新成功", res };
 });
 
 app.use(router.routes());
