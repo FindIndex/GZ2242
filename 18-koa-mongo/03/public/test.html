@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <template v-if="user">
+        <h1>{{user.username }}</h1>
+        <p>{{user.qianming}}</p>
+        <img width="20" height="20" :src="user.avatar" alt="" />
+      </template>
+      <hr />
+
+      <ul>
+        <li v-for="doc in lists">
+          <h3>{{doc.title}}</h3>
+          <p>{{doc.content}}</p>
+          <div style="display: flex">
+            <img :src="doc.author_res.avatar" width="20" height="20" alt="" />
+            <h5 style="margin: 0">{{doc.author_res.username}}</h5>
+            <button
+              @click="deleteArticle(doc._id)"
+              v-if="doc.author === user._id"
+            >
+              删除
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <script>
+      let _axios = axios.create({
+        headers: {
+          authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzY5Y2JlM2ZmMDhiOGI3YzY4OTliYTciLCJ1c2VybmFtZSI6Im1hcnJ5MiIsImlhdCI6MTY2Nzg3Nzg2Nn0.PQDy0OQKvvpqAp9lG5_IPewZDjmDsdpATSBt7BTJLuc",
+        },
+      });
+
+      new Vue({
+        el: "#app",
+        data: {
+          user: null,
+          lists: [],
+        },
+
+        created: function () {
+          _axios.get("http://localhost:8080/profile").then((res) => {
+            //   console.log(res.data);
+            this.user = res.data.user;
+          });
+
+          _axios
+            .get("http://localhost:8080/article", {
+              params: {
+                limit: 3,
+                page: 1,
+              },
+            })
+            .then((res) => {
+              // console.log(res.data.list);
+              this.lists = res.data.list;
+            });
+        },
+
+        methods: {
+          deleteArticle(id) {
+            // console.log(id);
+            _axios.delete("http://localhost:8080/article/" + id).then((res) => {
+              if (res.data.state == 200) {
+                // console.log("删除成功");
+                this.lists = this.lists.filter((o) => o._id !== id);
+              }
+              console.log(res);
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+
+<!-- 
+
+
+
+打发士大夫大师傅[br][img pic_type=1 width=238 height=238]https://tiebapic.baidu.com/forum/pic/item/b999a9014c086e06a1b6148947087bf40bd1cbd2.jpg?tbpicau=2022-11-11-05_021cc8392b7b0004dd343dee1905afdf[/img][br][br][emotion pic_type=1 width=30 height=30]//tb2.bdstatic.com/tb/editor/images/face/i_f04.png?t=20140803[/emotion]
+
+ -->
