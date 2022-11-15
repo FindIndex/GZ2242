@@ -3,7 +3,8 @@
 </template>
 
 <script setup>
-
+const foo = useFoo()
+console.log('-----------', foo, foo.value);
 </script>
 
 <style lang="scss" scoped>

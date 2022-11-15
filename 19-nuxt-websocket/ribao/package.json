@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.13",
+    "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "vant": "^3.6.5"
+  }
+}

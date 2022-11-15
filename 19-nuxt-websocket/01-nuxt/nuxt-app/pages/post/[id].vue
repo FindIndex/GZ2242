@@ -15,6 +15,28 @@ definePageMeta({
     }
 })
 
+useHead({
+    title: 'post page',
+    meta: [
+        { name: 'description', content: 'xxxxxxxxxxx.' }
+    ],
+    bodyAttrs: {
+        class: 'test'
+    },
+    script: [{ children: 'console.log(\'Hello world\')' }, {
+        src: 'https://third-party-script.com',
+        body: true
+    }],
+    link: [
+        {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap',
+            crossorigin: ''
+        }
+    ]
+})
+
+
 
 
 const route = useRoute()
