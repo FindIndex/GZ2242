@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <a href="http://localhost:8080/article/delete/636f4ee3d7ba8ad5cd53ea86"
+      >加入vip</a
+    >
+
+    <script>
+      axios({
+        method: "post",
+        url: "http://localhost:8080/article/delete/636f4ee3d7ba8ad5cd53ea86",
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>

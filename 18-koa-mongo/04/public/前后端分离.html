@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+    <!-- <script>
+      tinymce.init({
+        selector: "#mytextarea",
+        language:'zh_CN',
+      });
+    </script> -->
+
+    <script>
+      tinymce.init({
+        selector: "#mytextarea",
+        //skin:'oxide-dark',
+        language: "zh_CN",
+
+        plugins: "image",
+        toolbar: "image",
+        images_upload_url: "/demo/upimg",
+        images_upload_base_path: "/",
+
+        setup: function (ed) {
+          ed.on("change", function (e) {
+            // console.log("the event object ", e);
+            // console.log("the editor object ", ed);
+            // console.log(ed.getContent());
+            app.content = ed.getContent();
+          });
+        },
+
+        // setup: function (editor) {
+        //   editor.on("init", function (e) {
+        //     console.log("The Editor has initialized.");
+        //   });
+        // },
+
+        init_instance_callback: function (editor) {
+          editor.on("ExecCommand", function (e) {
+            // console.log("The " + e.command + " command was fired.");
+            console.log(e);
+          });
+        },
+      });
+
+      // tinymce.on('input', function(e) {
+      //   console.log(e);
+      // });
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <template v-if="user">
+        <h1>{{user.username }}</h1>
+        <p>{{user.qianming}}</p>
+        <img width="20" height="20" :src="user.avatar" alt="" />
+      </template>
+      <hr />
+
+      <input type="text" v-model="title" />
+      <textarea id="mytextarea"></textarea>
+      <button @click="addArticle">发布文章</button>
+
+      <hr />
+
+      <ul>
+        <li v-for="doc in lists">
+          <h3>{{doc.title}}</h3>
+          <p v-html="doc.content">{{doc.content}}</p>
+          <div style="display: flex">
+            <img :src="doc.author_res.avatar" width="20" height="20" alt="" />
+            <h5 style="margin: 0">{{doc.author_res.username}}</h5>
+            <button
+              @click="deleteArticle(doc._id)"
+              v-if="doc.author === user._id"
+            >
+              删除
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <script>
+      let _axios = axios.create({
+        headers: {
+          authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzY4YjBiZjFhY2RhMjZjZTdlZGNiNzQiLCJ1c2VybmFtZSI6Im5pY2siLCJpYXQiOjE2Njc5NzU0OTl9.aKcCX2Yu4SCA3jE7ZCiZKkdHuA8FF5Et0XQjRA_WMe0",
+        },
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          user: null,
+          lists: [],
+          title: "",
+          content: "",
+        },
+
+        created: function () {
+          _axios.get("http://localhost:8080/api/profile").then((res) => {
+            //   console.log(res.data);
+            this.user = res.data.user;
+          });
+
+          _axios
+            .get("http://localhost:8080/api/article", {
+              params: {
+                limit: 3,
+                page: 1,
+              },
+            })
+            .then((res) => {
+              // console.log(res.data.list);
+              this.lists = res.data.list;
+            });
+        },
+
+        methods: {
+          deleteArticle(id) {
+            // console.log(id);
+            _axios.delete("http://localhost:8080/api/article/" + id).then((res) => {
+              if (res.data.state == 200) {
+                // console.log("删除成功");
+                this.lists = this.lists.filter((o) => o._id !== id);
+              }
+              console.log(res);
+            });
+          },
+
+          addArticle() {
+            _axios
+              .post("http://localhost:8080/api/article", {
+                title: this.title,
+                content: this.content,
+              })
+              .then((res) => {
+                console.log("发布成功");
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+
+
+打发士大夫大师傅[br][img pic_type=1 width=238 height=238]https://tiebapic.baidu.com/forum/pic/item/b999a9014c086e06a1b6148947087bf40bd1cbd2.jpg?tbpicau=2022-11-11-05_021cc8392b7b0004dd343dee1905afdf[/img][br][br][emotion pic_type=1 width=30 height=30]//tb2.bdstatic.com/tb/editor/images/face/i_f04.png?t=20140803[/emotion]
+
+ -->

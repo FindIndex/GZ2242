@@ -1,0 +1,17 @@
+<% if(user) { %>
+<p>
+  <img
+    width="30"
+    height="30"
+    style="border-radius: 50%"
+    src="/<%= user?.avatar %>"
+    alt=""
+  />
+  <a href="/user/<%= user?._id %>"><%= user?.username %></a> 欢迎回来
+  <button onclick="document.cookie='user=0'; location.reload()">注销</button>
+  <!-- <button onclick="alert(123)">注销</button> -->
+</p>
+<% } else { %>
+<a href="/login.html">登录</a>
+<a href="/register.html">注册</a>
+<% } %>

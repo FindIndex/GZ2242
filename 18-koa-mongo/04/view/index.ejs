@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+      }
+      .card div {
+        display: flex;
+        align-items: center;
+      }
+      .card div h5 {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('header', {user}); %>
+
+    <hr />
+    <ul>
+      <% docs.forEach(doc => { %>
+      <a href="/article?id=<%= doc._id %>">
+        <li class="card">
+          <h3>
+            <%= doc.title %> <% if (doc.author === user?._id) { %>
+            <a href="">[编辑]</a>
+            <a href="/article/delete/<%= doc._id %>">[删除]</a>
+            <form action="/article/delete/<%= doc._id %>" method="post">
+              <input type="submit" value="删除" />
+            </form>
+
+            <% } %>
+          </h3>
+          <div>
+            <img
+              width="30"
+              height="30"
+              src="<%= doc.author_res.avatar %> "
+              alt=""
+            />
+            <h5><%= doc.author_res.username %></h5>
+          </div>
+        </li>
+      </a>
+      <% }) %>
+    </ul>
+  </body>
+</html>
