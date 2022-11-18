@@ -9,10 +9,12 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.13",
+    "nuxt": "3.0.0-rc.12",
     "sass": "^1.56.1"
   },
   "dependencies": {
+    "minireset.css": "^0.0.7",
+    "normalize.css": "^8.0.1",
     "vant": "^3.6.5"
   }
 }

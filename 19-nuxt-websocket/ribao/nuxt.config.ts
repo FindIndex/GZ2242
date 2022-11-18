@@ -13,13 +13,20 @@ export default defineNuxtConfig({
         },
         { name: "description", content: "日报nuxt版本" },
       ],
+      // link: [
+      //   // <link rel="stylesheet" href="https://myawesome-lib.css">
+      //   { rel: 'stylesheet', href: 'https://awesome-lib.css' }
+      // ],
       script: [
         // <script src="https://myawesome-lib.js"></script>
         { children: 'console.log("123")' },
       ],
       style: [
         // <style type="text/css">:root { color: red }</style>
-        { children: ":root { font-size: calc(100vw / 750) }", type: "text/css" },
+        {
+          children: ":root { font-size: calc(100vw / 750) }",
+          type: "text/css",
+        },
       ],
     },
   },

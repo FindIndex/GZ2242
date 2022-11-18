@@ -1,12 +1,13 @@
 <template>
-
-  <NuxtPage />
-
+    <div>
+        合集
+    </div>
 </template>
 
-<script setup>
+<script>
+export default {
 
-
+}
 </script>
 
 <style lang="scss" scoped>

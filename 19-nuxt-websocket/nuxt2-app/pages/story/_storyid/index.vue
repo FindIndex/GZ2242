@@ -1,28 +1,27 @@
 <template>
-    <div>
-        <div class="story-content" v-html="detail?.story?.body"></div>
+    <div class="detail">
+        <!-- detail {{ story }} -->
+        <div class="story-content" v-html="story?.body"></div>
     </div>
 </template>
 
-<script setup>
+<script>
+import axios from '@/plugins/axios'
 
-const route = useRoute()
-const router = useRouter()
-// When accessing /posts/1, route.params.id will be 1
-console.log(route.params.storyid,123456)
+export default {
+    async asyncData({ isDev, route, store, env, params, query, req, res, redirect, error }) {
+        // console.log(params);
+        // console.log(isDev, route, store, env, params, query, req, res, redirect, error);
+        let { data: story } = await axios.get(`story/${params.storyid}`)
 
+        // console.log(story);
+        return { story: story.story }
+    },
 
-console.log(`https://apis.netstart.cn/zhihudaily/story/${route.params.storyid}`);
-const { data: detail } = await useFetch(`https://apis.netstart.cn/zhihudaily/story/${route.params.storyid}`)
-
-
-// router.onBeforeRouteUpdate(() => {
-//     console.log(route.params.storyid)
-// })
-
+}
 </script>
 
-<style lang="scss">
+<style lang="less">
 .story-content {
 
     article,
