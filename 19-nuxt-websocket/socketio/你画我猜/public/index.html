@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <style>
+      #canvas {
+        border: 1px solid red;
+      }
+      #canvas.erasering {
+        cursor: crosshair;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <button onclick="toggleEraser()">橡皮擦</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      socket.on("mousedown", ({ x, y }) => {
+        context.beginPath();
+        context.moveTo(x, y);
+      });
+      socket.on("moving", ({ x, y, iszhuBoDrawing }) => {
+        console.log(x, y, iszhuBoDrawing);
+        if (iszhuBoDrawing) {
+          // 画线
+          context.lineTo(x, y);
+          context.stroke();
+        } else {
+          // 删除
+          context.clearRect(x - 10, y - 10, 20, 20);
+        }
+      });
+
+      /*  */
+      let canvas = document.getElementById("canvas");
+      let context = canvas.getContext("2d");
+
+      let isMoveing = false;
+      let isDrawing = true;
+
+      canvas.onmousedown = function (event) {
+        isMoveing = true;
+        let { x, y } = { x: event.offsetX, y: event.offsetY };
+        context.beginPath();
+        context.moveTo(x, y);
+
+        // 触发开始画
+        socket.emit("mousedown", { x, y });
+      };
+      document.body.onmouseup = function () {
+        isMoveing = false;
+      };
+
+      const moving = function (event) {
+        if (isMoveing) {
+          let { x, y } = { x: event.offsetX, y: event.offsetY };
+          if (isDrawing) {
+            // 画线
+            context.lineTo(x, y);
+            context.stroke();
+          } else {
+            // 删除
+            context.clearRect(x - 10, y - 10, 20, 20);
+          }
+          socket.emit("moving", { x, y, isDrawing });
+        }
+      };
+
+      canvas.onmousemove = _.throttle(moving, 50);
+
+      const toggleEraser = () => {
+        isDrawing = !isDrawing;
+        // console.log(isDrawing);
+        if (isDrawing) {
+          canvas.classList.remove("erasering");
+        } else {
+          canvas.classList.add("erasering");
+        }
+      };
+    </script>
+  </body>
+</html>

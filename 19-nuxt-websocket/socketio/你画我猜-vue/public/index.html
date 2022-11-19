@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="./vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+      .canvas {
+        border: 1px solid red;
+      }
+      .canvas.erasering {
+        cursor: crosshair;
+      }
+      .chart {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 300px;
+        border: 1px solid red;
+        height: 300px;
+        overflow-y: auto;
+      }
+      .chart li.me {
+        text-align: right;
+      }
+      textarea {
+        width: 300px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" @mouseup="down = false">
+      <section class="master" v-show="role ==='master'">
+        <canvas
+          class="canvas"
+          ref="huaban"
+          width="300"
+          height="300"
+          @mousedown="mousedown"
+          @mousemove="throttledMousemove"
+          @mouseout="down = false"
+        ></canvas>
+        <br />
+        <button>橡皮擦</button>
+        <button>清空画布</button>
+        <button>下一题</button>
+        <i>请画出:{{question}}</i>
+      </section>
+      <section class="visitor" v-show="role ==='visitor'">
+        <canvas class="canvas" ref="zhanban" width="300" height="300"></canvas>
+        <br />
+      </section>
+
+      <ul class="chart">
+        <li
+          v-for="(chart,index) in charts"
+          :key="index"
+          :class="{me:chart.isMe}"
+        >
+          <mark v-if="role === 'master'" @dblclick="setMaster(chart.user)"
+            >{{chart.user}}<i v-if="chart.user === currentMaster">主播</i></mark
+          >
+          <mark v-else
+            >{{chart.user}}<i v-if="chart.user === currentMaster">主播</i></mark
+          >
+          <br />
+          <span>{{chart.text}}</span>
+        </li>
+      </ul>
+      <br />
+      <textarea v-model="text" @keyup.enter="sendMsg"></textarea>
+    </div>
+    <script>
+      const socket = io();
+      socket.on("connect", function () {
+        vm.myid = socket.id;
+      });
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          role: "visitor",
+          // role: "master",
+          charts: [],
+          // downPos: { x: 0, y: 0 },
+          // movePos: { x: 0, y: 0 },
+          down: false,
+          text: "",
+          question: "",
+          myid: "",
+          currentMaster: "",
+        },
+
+        created() {
+          this.throttledMousemove = _.throttle(this.mousemove, 50);
+        },
+        mounted() {
+          this.zcontext = this.$refs.zhanban.getContext("2d");
+          this.hcontext = this.$refs.huaban.getContext("2d");
+
+          // socket.on("change-role", function (role, question) {
+          //   vm.role = role;
+          //   vm.question = question;
+          // });
+
+          socket.on("down", (x, y) => {
+            this.zcontext.beginPath();
+            this.zcontext.moveTo(x, y);
+          });
+
+          socket.on("move", (x, y) => {
+            this.zcontext.lineTo(x, y);
+            this.zcontext.stroke();
+          });
+
+          socket.on("recive-msg", (user, text) => {
+            this.charts.push({ user, text });
+          });
+
+          socket.on("set-master", (id, currentQuestion) => {
+            // this.charts.push({ user, text });
+            if (id === this.myid) {
+              this.role = "master";
+              this.currentMaster = this.myid;
+              this.question = currentQuestion;
+            } else {
+              this.role = "visitor";
+              this.currentMaster = id;
+            }
+            console.log(this.myid, this.currentMaster, id, currentQuestion);
+          });
+        },
+
+        methods: {
+          mousedown: function (event) {
+            this.down = true;
+            this.hcontext.beginPath();
+            this.hcontext.moveTo(event.offsetX, event.offsetY);
+
+            // 发数据
+            socket.emit("down", event.offsetX, event.offsetY);
+          },
+          mousemove: function (event) {
+            if (this.down) {
+              this.hcontext.lineTo(event.offsetX, event.offsetY);
+              this.hcontext.stroke();
+
+              // 发数据
+              socket.emit("move", event.offsetX, event.offsetY);
+            }
+          },
+
+          sendMsg: function () {
+            socket.emit("send-msg", this.text);
+            this.charts.push({ user: this.myid, text: this.text, isMe: true });
+            this.text = "";
+          },
+
+          setMaster: function (id) {
+            // console.log(socket.id);
+            socket.emit("set-master", id);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
