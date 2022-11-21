@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      //   console.log(React, ReactDOM);
+      // React Children Component createElement createRef  useXXX hook写法
+      // ReactDOM render createRoot
+
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+      //
+      //   let element = React.createElement(
+      //     "h1",
+      //     { id: "title", className: "test" },
+      //     "这是一个标题"
+      //   );
+      //   type标签, props属性, children子元素  属性的class换成 className
+
+      //   createElement 方法会返回一个 【react元素】 实际上就是一个普通对象=> 描述需要创建的页面元素
+
+      //   let element = React.createElement(
+      //     "li",
+      //     { className: "card" },
+      //     // "<h1>标题</h1><p>内容</p>",
+      //     React.createElement("h1", null, "标题"),
+      //     React.createElement("p", null, "内容")
+      //   );
+
+      // 渲染元素
+      //   root.render(element);
+
+      /* jsx语法 需要把jsx语法转换为 react元素（普通对象） */
+      //   let element = <h1>这是一个标题</h1>;
+      // jsx语法不是js支持的语法 => less浏览器不支持
+
+      let n = Math.random();
+
+      //   let element = (
+      //     <li className="test" id="hahaha">
+      //       <h1>标题</h1>
+      //       <p data-n={n}>内容{n}</p>
+      //       <img
+      //         src="https://www.bootcdn.cn/assets/img/jituyun-white.svg"
+      //         style={{ background: "red" }}
+      //       />
+      //     </li>
+      //   );
+      //   用 单个{}表示需要变量 "表示字符串"  { {对象} }  style属性的值 需要是一个对象
+
+      //   className style需要对象
+
+      let dayu = <i>大于</i>;
+      let xiaoyu = <i>xiaoyu</i>;
+
+      let result;
+      if (n > 0.5) {
+        result = dayu;
+      } else {
+        result = xiaoyu;
+      }
+
+      let arr = [11, 22, 33];
+      let element = (
+        <div>
+          <p>1{n}</p>
+          <p>2{Math.random()}</p>
+          <p>3{n > 0.5 ? "大于" : "xiaoyu"}</p>
+
+          <p>4{n > 0.5 ? <i>大于</i> : <i>xiaoyu</i>}</p>
+          <p>5{n > 0.5 ? dayu : xiaoyu}</p>
+          <p>6{result}</p>
+          {/* jsx注释  v-if v-else */}
+
+          <hr />
+
+          <p>{n > 0.5 && "hello"}</p>
+          {/* jsx注释  v-if */}
+
+          <hr />
+
+          <p>{arr[0]}</p>
+          <p>{arr[1]}</p>
+          <p>{arr[2]}</p>
+          <hr />
+
+          <ul>
+            <li>{arr[0]}</li>
+            <li>{arr[1]}</li>
+            <li>{arr[2]}</li>
+          </ul>
+
+          <hr />
+
+          <ul>{[<li>{arr[0]}</li>, <li>{arr[1]}</li>, <li>{arr[2]}</li>]}</ul>
+
+          <hr />
+          <ul>
+            {arr.map((o) => (
+              <li>{o}</li>
+            ))}
+          </ul>
+
+          {/* => v-for */}
+        </div>
+      );
+
+      //   jsx 本质是也是一个对象（react元素）
+
+      root.render(element);
+    </script>
+  </body>
+</html>

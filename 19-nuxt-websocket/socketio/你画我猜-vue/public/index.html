@@ -47,7 +47,7 @@
         ></canvas>
         <br />
         <button>橡皮擦</button>
-        <button>清空画布</button>
+        <button @click="clearhuaban">清空画布</button>
         <button>下一题</button>
         <i>请画出:{{question}}</i>
       </section>
@@ -132,7 +132,13 @@
               this.role = "visitor";
               this.currentMaster = id;
             }
-            console.log(this.myid, this.currentMaster, id, currentQuestion);
+            this.clearhuaban();
+            // console.log(this.myid, this.currentMaster, id, currentQuestion);
+          });
+
+          socket.on("clearhuaban", (user, text) => {
+            // this.clearhuaban();
+            this.zcontext.clearRect(0, 0, 300, 300);
           });
         },
 
@@ -164,6 +170,11 @@
           setMaster: function (id) {
             // console.log(socket.id);
             socket.emit("set-master", id);
+          },
+
+          clearhuaban() {
+            this.hcontext.clearRect(0, 0, 300, 300);
+            socket.emit("clearhuaban", 0, 0, 300, 300);
           },
         },
       });

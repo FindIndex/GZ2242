@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   console.log(onlineIds);
 
   if (onlineIds.length >= 2) {
-    currentMaster = onlineIds[0];
+    currentMaster = onlineIds.at(-1);
     currentQuestion = questions[Math.floor(Math.random() * questions.length)];
     // socket.to(currentMaster).emit("set-master", currentMaster, currentQuestion);
     io.emit("set-master", currentMaster, currentQuestion);
@@ -54,11 +54,17 @@ io.on("connection", (socket) => {
     console.log("set-master", id);
     // socket.to(id).emit("set-master", id, current);
 
+    // 验证权限
     if (socket.id === currentMaster) {
-      currentMaster = onlineIds[0];
+      currentMaster = id;
       currentQuestion = questions[Math.floor(Math.random() * questions.length)];
       io.emit("set-master", id, currentQuestion);
     }
+  });
+
+  socket.on("clearhuaban", (x, y, w, h) => {
+    // console.log(text);
+    socket.broadcast.emit("clearhuaban", x, y, w, h);
   });
 });
 
