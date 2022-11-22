@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      // Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
+      function Counter(props) {
+        // 声明一个新的叫做 “n” 的 state 变量
+        const [n, setN] = useState(10);
+        const [xxx, setXxx] = useState("xxx");
+        // useState(0) 是一个函数 这个函数会返回一个数组 有两项
+        // [n, setN]解构返回的结果 n既是一个变量 0就是默认值  setN是修改n的方法
+        // setN是一个函数 是用来更新n的方法  setN(新值)
+
+        // 定时器一般写在生命周期里面 创建完成之后
+        // setTimeout(() => {
+        //   setN(20);
+        // }, 3000);
+
+        // Effect Hook 可以让你在函数组件中执行副作用操作
+        // useEffect 是一个函数 useEffect函数可以携带一个函数作为参数
+        // 参数1函数 在 componentDidMount componentDidUpdate（用第二个参数控制） 的时候调用
+
+        // 参数2是一个数组，项是状态名字， 控制哪些状态更新的时候需要重新调用参数1
+        // useEffect(() => {
+        //   console.log("componentDidMount componentDidUpdate 参数1函数");
+        //   // 注意：只要更新状态就会再次调用第一个参数 函数2
+        //   setInterval(() => {
+        //     console.log("dingshiqi", n);
+        //     setN(Date.now());
+        //   }, 1000);
+        // }, [xxx]);
+        // 只有再xxx状态更新的时候才会触发第一个函数参数
+
+        useEffect(() => {
+          // console.log("componentDidMount componentDidUpdate 参数1函数", n);
+          // console.log("参数1函数");
+          let id = setInterval(() => {
+            console.log(Date.now(), n);
+            setN(n + 1);
+          }, 1000);
+
+          // 参数1函数  还可以返回一个函数 这个函数再 组件卸载的时候调用 componentWillUpdate  componentWillUnmount
+          return () => {
+            // console.log("参数1函数返回的函数");
+            clearInterval(id);
+          };
+        }, [n]);
+        // 空数组代表 没有任何状态的变化 可以再次触发 参数1
+
+        // useEffect(函数1 (返回一个函数2), [描述那些状态更新可以触发])
+
+        return (
+          <p>
+            you clicked {n} times - {props.msg}
+          </p>
+        );
+      }
+
+      let element = (
+        <div>
+          <Counter msg="hello" />
+        </div>
+      );
+      root.render(element);
+    </script>
+  </body>
+</html>

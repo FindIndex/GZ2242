@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      //   es6 继承
+      class Counter extends React.Component {
+        // 生命周期
+        constructor(props) {
+          super(props);
+          // 必须调用 这样子类才有了自己的 this
+
+          //   Counter组件私有的状态 类似 vue的data
+          this.state = {
+            n: 10,
+          };
+        }
+
+        // 挂载完成
+        componentDidMount() {
+          console.log("componentDidMount", this);
+
+          setInterval(() => {
+            // 获取组件状态
+            // console.log(this.state.n);
+
+            // 更改组件状态 => 类似小程序组件状态更新 this.setDate()
+            this.setState({
+              n: this.state.n + 1,
+            });
+          }, 1000);
+        }
+
+        // 即将卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount", this);
+        }
+
+        // 生命周期
+        // jsx视图写在render 方法里面
+        render() {
+          return (
+            <p>
+              you clicked {this.state.n} times - {this.props.msg}
+            </p>
+          );
+        }
+      }
+
+      let element = (
+        <div>
+          <Counter msg="hello" />
+          {/* <Counter msg="hello2" /> */}
+        </div>
+      );
+      root.render(element);
+    </script>
+  </body>
+</html>

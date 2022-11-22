@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      //   let element = <h1>哈哈哈</h1>;
+      //   root.render(element);
+
+      //   函数式组件 (简单)(暂时不能有自己的状态)
+      function Welcome(props) {
+        // console.log(props);
+        return <h1>你好，{props.name}</h1>;
+      }
+
+      //   root.render(Welcome());
+
+      //   root.render(<Welcome></Welcome>);
+      //   root.render(<Welcome />);
+      let element = (
+        <div>
+          <Welcome name="nick" />
+          <Welcome name="marry" />
+          <Welcome name="nicholas" />
+        </div>
+      );
+      root.render(element);
+    </script>
+  </body>
+</html>
