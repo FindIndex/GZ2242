@@ -47,21 +47,38 @@
         // }, [xxx]);
         // 只有再xxx状态更新的时候才会触发第一个函数参数
 
+        // useEffect(() => {
+        //   // console.log("componentDidMount componentDidUpdate 参数1函数", n);
+        //   console.log("参数1函数");
+        //   let id = setInterval(() => {
+        //     console.log(Date.now(), n, id);
+        //     setN(n + 1);
+        //   }, 1000);
+
+        //   // 参数1函数  还可以返回一个函数 这个函数再 组件卸载的时候调用 componentWillUpdate  componentWillUnmount
+        //   return () => {
+        //     console.log("参数1函数返回的函数");
+        //     clearInterval(id);
+        //   };
+        // }, [n]);
+        // 空数组代表 没有任何状态的变化 可以再次触发 参数1
+
         useEffect(() => {
-          // console.log("componentDidMount componentDidUpdate 参数1函数", n);
-          // console.log("参数1函数");
+          console.log("参数1函数");
           let id = setInterval(() => {
-            console.log(Date.now(), n);
-            setN(n + 1);
+            // 函数式更新
+            setN((n) => {
+              console.log(n);
+              return n + 1;
+            });
           }, 1000);
 
           // 参数1函数  还可以返回一个函数 这个函数再 组件卸载的时候调用 componentWillUpdate  componentWillUnmount
           return () => {
-            // console.log("参数1函数返回的函数");
+            console.log("参数1函数返回的函数");
             clearInterval(id);
           };
-        }, [n]);
-        // 空数组代表 没有任何状态的变化 可以再次触发 参数1
+        }, []);
 
         // useEffect(函数1 (返回一个函数2), [描述那些状态更新可以触发])
 
