@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- bind写法 -->
+    <!-- <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: 10,
+          };
+
+          // 固定this // 为了在回调中使用 `this`，这个绑定是必不可少的
+          this.clickHandler = this.clickHandler.bind(this);
+        }
+
+        clickHandler() {
+          console.log(123, this);
+
+          this.setState({
+            count: this.state.count + 1,
+          });
+        }
+
+        render() {
+          // console.log(this);
+          return (
+            <p onClick={this.clickHandler}>
+              you clicked {this.state.count} times
+            </p>
+          );
+        }
+      }
+
+      root.render(<Counter />);
+    </script> -->
+
+    <!-- public feild 语法 -->
+    <!-- <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: 10,
+          };
+        }
+
+        clickHandler = () => {
+          console.log(123, this);
+
+          this.setState({
+            count: this.state.count + 1,
+          });
+        };
+
+        render() {
+          // console.log(this);
+          return (
+            <p onClick={this.clickHandler}>
+              you clicked {this.state.count} times
+            </p>
+          );
+        }
+      }
+
+      root.render(<Counter />);
+    </script> -->
+
+    <!-- 箭头函数 -->
+    <!-- <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: 10,
+          };
+        }
+
+        clickHandler() {
+          console.log(123, this);
+
+          this.setState({
+            count: this.state.count + 1,
+          });
+        }
+
+        render() {
+          // console.log(this);
+          return (
+            <p onClick={() => this.clickHandler()}>
+              you clicked {this.state.count} times
+            </p>
+          );
+        }
+      }
+
+      root.render(<Counter />);
+    </script> -->
+  </body>
+</html>

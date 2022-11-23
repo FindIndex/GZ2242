@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      function Form(props) {
+        const [text, setText] = useState("hahaha");
+        const [gender, setGender] = useState("男");
+        const [isMarried, setIsMarried] = useState(true);
+        const [duoxuan, setDuoxuan] = useState(["A", "D"]);
+
+        const changeHandler = (event) => {
+          // console.log(123, event.target.value);
+          setText(event.target.value);
+        };
+
+        const genderChange = (event) => {
+          // console.log(event.target.value);
+          setGender(event.target.value);
+        };
+
+        const isMarriedChange = (event) => {
+          // console.log(event.target.checked);
+          setIsMarried(event.target.checked);
+        };
+
+        const duoxuanChange = (event) => {
+          // console.log(event.target.value, event.target.checked);
+          if (event.target.checked) {
+            setDuoxuan([...duoxuan, event.target.value]);
+          } else {
+            setDuoxuan(duoxuan.filter((o) => o !== event.target.value));
+          }
+        };
+
+        return (
+          <form action="" method="get">
+            {/* 文本表单 */}
+            <input type="text" value={text} onChange={changeHandler} />
+            {/* radio */}
+            <br />
+            单选
+            <input
+              type="radio"
+              name="gender"
+              value="男"
+              checked={gender === "男"}
+              onChange={genderChange}
+            />
+            <input
+              type="radio"
+              name="gender"
+              value="女"
+              checked={gender === "女"}
+              onChange={genderChange}
+            />
+            {/* checkbox */}
+            <br />
+            <input
+              type="checkbox"
+              name="isMarried"
+              checked={isMarried}
+              onChange={isMarriedChange}
+            />
+            是否已婚
+            <br />
+            多选答案
+            <input
+              type="checkbox"
+              name="duoxuan"
+              value="A"
+              checked={duoxuan.includes("A")}
+              onChange={duoxuanChange}
+            />
+            <input
+              type="checkbox"
+              name="duoxuan"
+              value="B"
+              checked={duoxuan.includes("B")}
+              onChange={duoxuanChange}
+            />
+            <input
+              type="checkbox"
+              name="duoxuan"
+              value="C"
+              checked={duoxuan.includes("C")}
+              onChange={duoxuanChange}
+            />
+            <input
+              type="checkbox"
+              name="duoxuan"
+              value="D"
+              checked={duoxuan.includes("D")}
+              onChange={duoxuanChange}
+            />
+          </form>
+        );
+      }
+
+      root.render(<Form />);
+    </script>
+  </body>
+</html>

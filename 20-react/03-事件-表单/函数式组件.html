@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const { useState } = React;
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      function Counter(props) {
+        const [count, setCount] = useState(10);
+
+        // 只有event事件对象
+        // const clickHandler = function (event) {
+        //   console.log(123, count, event);
+        //   // event 合成事件对象 与原生事件对象区别 增强了兼容性
+        //   setCount(count + 1);
+        //   // 如果新的值依赖上一次的值
+        // };
+
+        // 只有自定义参数
+        // const clickHandler = function (params) {
+        //   console.log(123, count, event, params);
+        //   // event 原生事件对象
+        //   setCount(count + 1);
+        //   // 如果新的值依赖上一次的值
+        // };
+
+        // return (
+        //   <p onClick={() => clickHandler(200)}>you clicked {count} times</p>
+        // );
+
+        // 既有参数 又有事件对象event
+
+        const clickHandler = function (params, event) {
+          console.log(123, count, event, params);
+          // event 原生事件对象
+          setCount(count + 1);
+          // 如果新的值依赖上一次的值
+        };
+        return (
+          <p onClick={(event) => clickHandler(200, event)}>
+            you clicked {count} times
+          </p>
+        );
+      }
+      // 与js事件原生写法 区别 1小驼峰 2只有事件名字变量
+
+      root.render(<Counter />);
+    </script>
+  </body>
+</html>
