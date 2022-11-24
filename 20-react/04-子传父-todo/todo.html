@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+      const TodoAdd = ({ addTodo }) => {
+        const [text, setText] = useState("");
+
+        const textChange = (event) => {
+          setText(event.target.value);
+        };
+
+        const keyUphandler = (event) => {
+          //   console.log(event.key);
+          if (event.key === "Enter") {
+            setText("");
+            // console.log("addTodo");
+            addTodo(text);
+          }
+        };
+
+        return (
+          <header>
+            <input
+              type="text"
+              value={text}
+              onChange={textChange}
+              onKeyUp={keyUphandler}
+            />
+          </header>
+        );
+      };
+
+      const TodoItem = ({ todo, toggleTodo, deleteTodo }) => {
+        const changeHandler = (event) => {
+          //   console.log("TodoItem", todo.id, event.target.checked);
+          toggleTodo({ id: todo.id, complated: event.target.checked });
+        };
+        return (
+          <li>
+            <input
+              type="checkbox"
+              checked={todo.complated}
+              onChange={changeHandler}
+            />
+            <i> {todo.text} </i>
+            <mark onClick={() => deleteTodo(todo.id)}>X</mark>
+          </li>
+        );
+      };
+
+      const TodoList = ({ todos, toggleTodo, deleteTodo }) => {
+        return (
+          <ul>
+            {todos.map((o) => (
+              <TodoItem
+                key={o.id}
+                todo={o}
+                toggleTodo={toggleTodo}
+                deleteTodo={deleteTodo}
+              />
+            ))}
+          </ul>
+        );
+      };
+      const TodoFilter = (props) => {
+        return <footer>filter</footer>;
+      };
+
+      const App = (props) => {
+        const [todos, setTodos] = useState([
+          { id: 1, text: "vue", complated: true },
+          { id: 3, text: "vuerouter", complated: true },
+          { id: 4, text: "react", complated: false },
+        ]);
+
+        const addTodo = (text) => {
+          //   console.log(text);
+
+          setTodos([
+            ...todos,
+            {
+              id: todos.length ? Math.max(...todos.map((o) => o.id)) + 1 : 1,
+              text,
+              complated: false,
+            },
+          ]);
+        };
+
+        const toggleTodo = ({ id, complated }) => {
+          //   console.log("App toggleTodo", id, complated);
+          setTodos(todos.map((o) => (o.id === id ? { ...o, complated } : o)));
+        };
+        const deleteTodo = (id) => {
+          //   console.log("App toggleTodo", id, complated);
+          setTodos(todos.filter((o) => o.id !== id));
+        };
+
+        return (
+          <div className="app">
+            <TodoAdd addTodo={addTodo} />
+            <TodoList
+              todos={todos}
+              toggleTodo={toggleTodo}
+              deleteTodo={deleteTodo}
+            />
+            <TodoFilter />
+          </div>
+        );
+      };
+      root.render(<App />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.20.4/babel.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+      const root = ReactDOM.createRoot(document.querySelector("#app"));
+
+      function Child({ yyy, n }) {
+        return (
+          <div className="child">
+            <p onClick={yyy}>child - {n}</p>
+          </div>
+        );
+      }
+
+      function Parent(props) {
+        return (
+          <div className="parent">
+            <p onClick={props.xxx}>parent</p>
+            <Child n={props.n} yyy={props.xxx} />
+          </div>
+        );
+      }
+
+      function App(props) {
+        const [n, setN] = useState(10);
+
+        const increment = function () {
+          setN((n) => n + 1);
+        };
+
+        return (
+          <div className="app">
+            <p onClick={increment}>App {n}</p>
+            <Parent n={n} xxx={increment} />
+          </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
