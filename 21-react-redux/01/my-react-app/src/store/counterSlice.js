@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
+const counterSlice = createSlice({
   name: "counter",
   initialState: {
     value: 0,
-    msg: "hello",
+    msg: "hello world",
   },
   reducers: {
     incremented: (state) => {
@@ -16,7 +16,4 @@ export const counterSlice = createSlice({
   },
 });
 
-export const selectCount = (state) => state.counter.value;
-export const selectMsg = (state) => state.counter.msg;
-
-export default counterSlice.reducer;
+export default counterSlice;
