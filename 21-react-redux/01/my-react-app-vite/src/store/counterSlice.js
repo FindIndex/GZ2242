@@ -7,13 +7,15 @@ const counterSlice = createSlice({
     msg: "hello world",
   },
   reducers: {
-    incremented: (state) => {
+    increment: (state) => {
       state.value += 1;
     },
-    decremented: (state) => {
+    decrement: (state) => {
       state.value -= 1;
     },
   },
 });
+export const { increment } = counterSlice.actions;
+export const selectCount = (state) => state.counter.value;
 
 export default counterSlice;

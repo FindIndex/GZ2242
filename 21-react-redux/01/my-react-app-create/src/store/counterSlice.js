@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const counterSlice = createSlice({
   name: "counter",
@@ -18,10 +18,34 @@ const counterSlice = createSlice({
       // console.log(state, action);
     },
   },
+
+  // 异步
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementAsync.pending, (state) => {
+        console.log("pending...");
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        console.log(action);
+        state.value += action.payload;
+      });
+  },
 });
 
 export const { increment, decrement, incrementWithParam } =
   counterSlice.actions;
+
+// 异步
+export const incrementAsync = createAsyncThunk(
+  "counter/incrementAsync",
+  async (amount) => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(amount * 2);
+      }, 5000);
+    });
+  }
+);
 export const selectCount = (state) => state.counter.value;
 
 export default counterSlice;
