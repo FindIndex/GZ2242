@@ -14,6 +14,7 @@ import Home from "./views/Home";
 import Rank from "./views/Rank";
 import Cate from "./views/Cate";
 import Shelf from "./views/Shelf";
+import Detail, { loader as detailLoader } from "./views/Detail";
 
 const router = createHashRouter([
   {
@@ -37,6 +38,11 @@ const router = createHashRouter([
         element: <Shelf />,
       },
     ],
+  },
+  {
+    path: "detail/:id",
+    element: <Detail />,
+    loader: detailLoader,
   },
 ]);
 
