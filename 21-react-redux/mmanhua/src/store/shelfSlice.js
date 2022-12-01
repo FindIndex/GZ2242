@@ -3,14 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const shelfSlice = createSlice({
   name: "shelf",
   initialState: {
-    books: [],
+    books:
+      JSON.parse(window.localStorage.getItem("shelfBooks")) || [],
   },
   reducers: {
-    add: (state) => {
-      state.books;
+    add: (state, action) => {
+      console.log(state, action);
+      state.books = [...state.books, action.payload];
     },
-    remove: (state) => {
-      state.books;
+    remove: (state, action) => {
+      // state.books;
+      state.books = state.books.filter(
+        (o) => o.id !== action.payload
+      );
     },
   },
 });

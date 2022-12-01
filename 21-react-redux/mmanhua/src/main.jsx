@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import '@vant/touch-emulator';
 // import App from "./App";
 // import "./index.css";
 // redux
@@ -8,6 +9,8 @@ import store from "./store/index.js";
 
 // router
 import { createHashRouter, RouterProvider } from "react-router-dom";
+
+import LocalStorageSync from "./views/LocalStorageSync";
 
 import Root from "./views/Root";
 import Home from "./views/Home";
@@ -54,6 +57,7 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
+    <LocalStorageSync />
     <RouterProvider router={router} />
   </Provider>
 );
