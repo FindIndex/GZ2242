@@ -14,12 +14,12 @@ export async function loader({ params }) {
   return data;
 }
 
-export default function Detail() {
+export default function Detail({ match }) {
   const dispatch = useDispatch();
-
   const { data: detail } = useLoaderData();
-
   const shelfBooks = useSelector(selectBooks);
+
+  console.log(useParams());
 
   // useEffect(() => {
   //   console.log(shelfBooks);

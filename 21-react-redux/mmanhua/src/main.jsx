@@ -61,3 +61,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </Provider>
 );
+
+
+
+// mumu模拟器 x86架构 某些app闪退
+// 安卓真机(11以下） 连接电脑热点（在同一个局域网）=> 配置代理
+// sslpin 需要手机 root （手机虚拟机 Vmose pro）

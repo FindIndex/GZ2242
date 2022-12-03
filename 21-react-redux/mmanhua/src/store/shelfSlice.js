@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const shelfSlice = createSlice({
   name: "shelf",
@@ -21,5 +21,18 @@ const shelfSlice = createSlice({
 });
 export const { add, remove } = shelfSlice.actions;
 export const selectBooks = (state) => state.shelf.books;
+
+// getters 属性
+export const selectShelfBooksCount = createSelector(
+  [selectBooks],
+  (books) => books.length
+);
+
+// getters 方法
+export const selectBooksByKeyword = createSelector(
+  [selectBooks, (state, keyword) => keyword],
+  (books, keyword) =>
+    keyword ? books.filter((o) => o.title.includes(keyword)) : []
+);
 
 export default shelfSlice;
